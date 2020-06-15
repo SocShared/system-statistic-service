@@ -15,6 +15,7 @@ build:
   artifacts:
     paths:
       - build/libs/socshared-system-statistic-service-1.0.0-SNAPSHOT.jar
+    expire_in: 1 hrs
 
 docker-build:
   stage: docker-build
@@ -35,4 +36,5 @@ docker-deploy-swarm:
     - echo "SENTRY_API_KEY=$SENTRY_API_KEY" >> .env_stat
     - echo "SENTRY_URL=$SENTRY_URL" >> .env_stat
     - echo "SECRET_JWT_KEY=$SECRET_JWT_KEY" >> .env_stat
+    - echo "SERVICE_ID=$SERVICE_ID" >> .env_stat
     - sudo docker stack deploy -c docker-compose.yaml socshared
