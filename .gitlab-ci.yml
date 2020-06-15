@@ -14,20 +14,25 @@ build:
   script: ./gradlew clean build
   artifacts:
     paths:
-      - build/libs/socshared-microservice-template-1.0.0-SNAPSHOT.jar
+      - build/libs/socshared-system-statistic-service-1.0.0-SNAPSHOT.jar
 
 docker-build:
   stage: docker-build
   script:
-    - sudo docker build -t $CI_DOCKER_LOGIN/socshared-microservice-template .
+    - sudo docker build -t $CI_DOCKER_LOGIN/socshared-system-statistic-service .
 
 docker-push:
   stage: docker-push
   script:
     - sudo docker login -u "$CI_DOCKER_LOGIN" -p "$CI_DOCKER_PASSWORD"
-    - sudo docker push $CI_DOCKER_LOGIN/socshared-microservice-template
+    - sudo docker push $CI_DOCKER_LOGIN/socshared-system-statistic-service
 
 docker-deploy-swarm:
   stage: docker-deploy-swarm
   script:
+    - touch .env_stat
+    - echo "SPRING_PROFILE=$SPRING_PROFILE" >> .env_stat
+    - echo "SENTRY_API_KEY=$SENTRY_API_KEY" >> .env_stat
+    - echo "SENTRY_URL=$SENTRY_URL" >> .env_stat
+    - echo "SECRET_JWT_KEY=$SECRET_JWT_KEY" >> .env_stat
     - sudo docker stack deploy -c docker-compose.yaml socshared

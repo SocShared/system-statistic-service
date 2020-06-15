@@ -1,14 +1,18 @@
 spring:
-  datasource:
-    url: jdbc:h2:mem:facebook_db?useUnicode=yes&characterEncoding=UTF-8
-    driver-class-name: org.h2.Driver
-    username: sa
-  jpa:
-    hibernate:
-      ddl-auto: update
   zipkin:
     base-url: https://zipkin.socshared.ml/
     service:
       name: ${spring.application.name}
   main:
     allow-bean-definition-overriding: true
+
+sentry:
+  api:
+    key: ${SENTRY_API_KEY:8a102d3eae46498f9e1c5db42298308bbf50051724ae4cac9ee86b13ea9dfbbd}
+  url: ${SENTRY_URL:https://sentry.socshared.ml}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: auditevents, beans, caches, conditions, configprops, health, httptrace, info, loggers, metrics, mappings, shutdown
