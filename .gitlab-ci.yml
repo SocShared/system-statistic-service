@@ -37,4 +37,5 @@ docker-deploy-swarm:
     - echo "SENTRY_URL=$SENTRY_URL" >> .env_stat
     - echo "SECRET_JWT_KEY=$SECRET_JWT_KEY" >> .env_stat
     - echo "SERVICE_ID=$SERVICE_ID" >> .env_stat
+    - echo "AUTH_SERVICE=$AUTH_SERVICE" >> .env_stat
     - docker stack deploy -c docker-compose.yaml socshared

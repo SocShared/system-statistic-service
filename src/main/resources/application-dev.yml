@@ -11,6 +11,10 @@ sentry:
     key: ${SENTRY_API_KEY:8a102d3eae46498f9e1c5db42298308bbf50051724ae4cac9ee86b13ea9dfbbd}
   url: ${SENTRY_URL:https://sentry.socshared.ml}
 
+feign:
+  url:
+    auth: ${AUTH_SERVICE:http://auth-service:9999/}
+
 management:
   endpoints:
     web:
