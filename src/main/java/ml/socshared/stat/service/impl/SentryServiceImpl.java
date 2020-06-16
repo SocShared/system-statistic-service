@@ -112,66 +112,82 @@ public class SentryServiceImpl implements SentryService {
         FacebookEventsResponse facebookEventsResponse = new FacebookEventsResponse();
 
         SentryIssueResponse[] fbAllFacebookAccount = client.getIssues("server_name:"+SentryServerName.FB_ADAPTER+" type:" + SentryFacebookTags.GET_ALL_FACEBOOK_ACCOUNT, token());
+        log.info("query: server_name:"+SentryServerName.FB_ADAPTER+" type:" + SentryFacebookTags.GET_ALL_FACEBOOK_ACCOUNT);
         if (fbAllFacebookAccount.length == 1)
             facebookEventsResponse.setAllFacebookAccountEventsCount(Long.parseLong(fbAllFacebookAccount[0].getCount()));
 
         SentryIssueResponse[] fbSaveAccount = client.getIssues("server_name:"+SentryServerName.FB_ADAPTER+" type:" + SentryFacebookTags.SAVE_ACCOUNT, token());
+        log.info("query: server_name:"+SentryServerName.FB_ADAPTER+" type:" + SentryFacebookTags.SAVE_ACCOUNT);
         if (fbSaveAccount.length == 1)
             facebookEventsResponse.setSaveAccountEventsCount(Long.parseLong(fbSaveAccount[0].getCount()));
 
         SentryIssueResponse[] fbRemoveAccount = client.getIssues("server_name:"+SentryServerName.FB_ADAPTER+" type:" + SentryFacebookTags.REMOVE_ACCOUNT, token());
+        log.info("query: server_name:"+SentryServerName.FB_ADAPTER+" type:" + SentryFacebookTags.REMOVE_ACCOUNT);
         if (fbRemoveAccount.length == 1)
             facebookEventsResponse.setRemoveAccountEventsCount(Long.parseLong(fbRemoveAccount[0].getCount()));
 
         SentryIssueResponse[] fbUrlForming = client.getIssues("server_name:"+SentryServerName.FB_ADAPTER+" type:" + SentryFacebookTags.URL_FORMING, token());
+        log.info("query: server_name:"+SentryServerName.FB_ADAPTER+" type:" + SentryFacebookTags.URL_FORMING);
         if (fbUrlForming.length == 1)
             facebookEventsResponse.setUrlFormingEventsCount(Long.parseLong(fbUrlForming[0].getCount()));
 
         SentryIssueResponse[] fbUserInfo = client.getIssues("server_name:"+SentryServerName.FB_ADAPTER+" type:" + SentryFacebookTags.GET_USER_INFO, token());
+        log.info("query: server_name:"+SentryServerName.FB_ADAPTER+" type:" + SentryFacebookTags.GET_USER_INFO);
         if (fbUserInfo.length == 1)
             facebookEventsResponse.setUserInfoEventsCount(Long.parseLong(fbUserInfo[0].getCount()));
 
         SentryIssueResponse[] fbCommentsOfPost = client.getIssues("server_name:"+SentryServerName.FB_ADAPTER+" type:" + SentryFacebookTags.COMMENTS_OF_POST, token());
+        log.info("query: server_name:"+SentryServerName.FB_ADAPTER+" type:" + SentryFacebookTags.COMMENTS_OF_POST);
         if (fbCommentsOfPost.length == 1)
             facebookEventsResponse.setCommentsOfPostEventsCount(Long.parseLong(fbCommentsOfPost[0].getCount()));
 
         SentryIssueResponse[] fbCommentOfPost = client.getIssues("server_name:"+SentryServerName.FB_ADAPTER+" type:" + SentryFacebookTags.COMMENT_OF_POST, token());
+        log.info("query: server_name:"+SentryServerName.FB_ADAPTER+" type:" + SentryFacebookTags.COMMENT_OF_POST);
         if (fbCommentOfPost.length == 1)
             facebookEventsResponse.setCommentOfPostEventsCount(Long.parseLong(fbCommentOfPost[0].getCount()));
 
         SentryIssueResponse[] fbSubComments = client.getIssues("server_name:"+SentryServerName.FB_ADAPTER+" type:" + SentryFacebookTags.GET_SUB_COMMENTS, token());
+        log.info("query: server_name:"+SentryServerName.FB_ADAPTER+" type:" + SentryFacebookTags.GET_SUB_COMMENTS);
         if (fbSubComments.length == 1)
             facebookEventsResponse.setSubCommentsEventsCount(Long.parseLong(fbSubComments[0].getCount()));
 
         SentryIssueResponse[] fbSumCommentById = client.getIssues("server_name:"+SentryServerName.FB_ADAPTER+" type:" + SentryFacebookTags.GET_SUB_COMMENT_BY_ID, token());
+        log.info("query: server_name:"+SentryServerName.FB_ADAPTER+" type:" + SentryFacebookTags.GET_SUB_COMMENT_BY_ID);
         if (fbSumCommentById.length == 1)
             facebookEventsResponse.setSubCommentByIdEventsCount(Long.parseLong(fbSumCommentById[0].getCount()));
 
         SentryIssueResponse[] fbUserGroups = client.getIssues("server_name:"+SentryServerName.FB_ADAPTER+" type:" + SentryFacebookTags.GET_USER_GROUPS, token());
+        log.info("query: server_name:"+SentryServerName.FB_ADAPTER+" type:" + SentryFacebookTags.GET_USER_GROUPS);
         if (fbUserGroups.length == 1)
             facebookEventsResponse.setUserGroupsEventsCount(Long.parseLong(fbUserGroups[0].getCount()));
 
         SentryIssueResponse[] fbUserGroup = client.getIssues("server_name:"+SentryServerName.FB_ADAPTER+" type:" + SentryFacebookTags.GET_USER_GROUP, token());
+        log.info("query: server_name:"+SentryServerName.FB_ADAPTER+" type:" + SentryFacebookTags.GET_USER_GROUP);
         if (fbUserGroup.length == 1)
             facebookEventsResponse.setUserGroupEventsCount(Long.parseLong(fbUserGroup[0].getCount()));
 
         SentryIssueResponse[] fbPosts = client.getIssues("server_name:"+SentryServerName.FB_ADAPTER+" type:" + SentryFacebookTags.GET_POSTS, token());
+        log.info("query: server_name:"+SentryServerName.FB_ADAPTER+" type:" + SentryFacebookTags.GET_POSTS);
         if (fbPosts.length == 1)
             facebookEventsResponse.setPostsEventsCount(Long.parseLong(fbPosts[0].getCount()));
 
         SentryIssueResponse[] fbPost = client.getIssues("server_name:"+SentryServerName.FB_ADAPTER+" type:" + SentryFacebookTags.GET_POST, token());
+        log.info("query: server_name:"+SentryServerName.FB_ADAPTER+" type:" + SentryFacebookTags.GET_POST);
         if (fbPost.length == 1)
             facebookEventsResponse.setPostByIdEventsCount(Long.parseLong(fbPost[0].getCount()));
 
         SentryIssueResponse[] fbAddPost = client.getIssues("server_name:"+SentryServerName.FB_ADAPTER+" type:" + SentryFacebookTags.ADD_POST, token());
+        log.info("query: server_name:"+SentryServerName.FB_ADAPTER+" type:" + SentryFacebookTags.ADD_POST);
         if (fbAddPost.length == 1)
             facebookEventsResponse.setAddPostEventsCount(Long.parseLong(fbAddPost[0].getCount()));
 
         SentryIssueResponse[] fbUpdatePost = client.getIssues("server_name:"+SentryServerName.FB_ADAPTER+" type:" + SentryFacebookTags.UPDATE_POST, token());
+        log.info("query: server_name:"+SentryServerName.FB_ADAPTER+" type:" + SentryFacebookTags.UPDATE_POST);
         if (fbUpdatePost.length == 1)
             facebookEventsResponse.setUpdatePostEventsCount(Long.parseLong(fbUpdatePost[0].getCount()));
 
         SentryIssueResponse[] fbDeletePost = client.getIssues("server_name:"+SentryServerName.FB_ADAPTER+" type:" + SentryFacebookTags.DELETE_POST, token());
+        log.info("query: server_name:"+SentryServerName.FB_ADAPTER+" type:" + SentryFacebookTags.DELETE_POST);
         if (fbDeletePost.length == 1)
             facebookEventsResponse.setDeletePostEventsCount(Long.parseLong(fbDeletePost[0].getCount()));
 
