@@ -1,4 +1,4 @@
-package ml.socshared.stat.domain;
+package ml.socshared.stat.domain.enums.tags;
 
 public enum SentryVkTags {
     GET_USER_INFO("type", "get_user_info"),

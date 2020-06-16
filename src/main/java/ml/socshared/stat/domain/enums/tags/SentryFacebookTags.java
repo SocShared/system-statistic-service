@@ -1,4 +1,4 @@
-package ml.socshared.stat.domain;
+package ml.socshared.stat.domain.enums.tags;
 
 public enum SentryFacebookTags {
     GET_ALL_FACEBOOK_ACCOUNT("type", "get_all_facebook_account"),
