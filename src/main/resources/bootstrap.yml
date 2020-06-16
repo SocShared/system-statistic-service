@@ -6,7 +6,7 @@ server:
 
 spring:
   application:
-    name: socshared-microservice-template
+    name: sys-stat
   profiles:
     active: ${SPRING_PROFILE:local}
 
