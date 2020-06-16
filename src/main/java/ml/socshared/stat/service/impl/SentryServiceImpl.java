@@ -1,6 +1,7 @@
 package ml.socshared.stat.service.impl;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import ml.socshared.stat.client.SentryFeignClient;
 import ml.socshared.stat.domain.enums.SentryServerName;
 import ml.socshared.stat.domain.enums.tags.SentryVkTags;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class SentryServiceImpl implements SentryService {
 
     private final SentryFeignClient client;
@@ -31,16 +33,18 @@ public class SentryServiceImpl implements SentryService {
 
     @Override
     public UsingSocialNetworkResponse getUsingSocialNetwork() {
-        SentryIssueResponse[] vkEvents = client.getIssues("server_name:" + SentryServerName.VK_ADAPTER + " level:info", token());
-        SentryIssueResponse[] fbEvents = client.getIssues("server_name:" + SentryServerName.FB_ADAPTER + " level:info", token());
+        SentryIssueResponse[] vkEvents = client.getIssues("server_name:vk-adapter level:info", token());
+        SentryIssueResponse[] fbEvents = client.getIssues("server_name:fb-adapter level:info", token());
 
         long vkEventsCount = 0L;
         for (SentryIssueResponse response : vkEvents) {
+            log.info(response.getCount());
             vkEventsCount += Long.parseLong(response.getCount());
         }
 
         long fbEventsCount = 0L;
         for (SentryIssueResponse response : fbEvents) {
+            log.info(response.getCount());
             fbEventsCount += Long.parseLong(response.getCount());
         }
 
