@@ -5,21 +5,20 @@ import lombok.Builder;
 import lombok.Data;
 
 @Data
-@JsonInclude(JsonInclude.Include.NON_NULL)
 public class VkEventsResponse {
 
-    private Long allEventsCount;
-    private Long userInfoEventsCount;
-    private Long commentsOfPostEventsCount;
-    private Long commentOfPostEventsCount;
-    private Long subCommentsEventsCount;
-    private Long subCommentByIdEventsCount;
-    private Long userGroupsEventsCount;
-    private Long userGroupEventsCount;
-    private Long postsEventsCount;
-    private Long postByIdEventsCount;
-    private Long addPostEventsCount;
-    private Long updatePostEventsCount;
-    private Long deletePostEventsCount;
+    private long allEventsCount;
+    private long userInfoEventsCount;
+    private long commentsOfPostEventsCount;
+    private long commentOfPostEventsCount;
+    private long subCommentsEventsCount;
+    private long subCommentByIdEventsCount;
+    private long userGroupsEventsCount;
+    private long userGroupEventsCount;
+    private long postsEventsCount;
+    private long postByIdEventsCount;
+    private long addPostEventsCount;
+    private long updatePostEventsCount;
+    private long deletePostEventsCount;
 
 }

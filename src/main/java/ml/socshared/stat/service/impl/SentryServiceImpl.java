@@ -35,7 +35,7 @@ public class SentryServiceImpl implements SentryService {
 
     @Override
     public UsingSocialNetworkResponse getUsingSocialNetwork() {
-        VkEventsResponse vkEventsResponse = vkFacebookEvents();
+        VkEventsResponse vkEventsResponse = findVkEvents();
 
         FacebookEventsResponse facebookEventsResponse = findFacebookEvents();
 
@@ -45,7 +45,7 @@ public class SentryServiceImpl implements SentryService {
                 .build();
     }
 
-    private VkEventsResponse vkFacebookEvents() {
+    private VkEventsResponse findVkEvents() {
         VkEventsResponse vkEventsResponse = new VkEventsResponse();
 
         SentryIssueResponse[] vkUserInfo = client.getIssues("server_name:"+SentryServerName.VK_ADAPTER+" type:" + SentryVkTags.GET_USER_INFO, token());
@@ -96,7 +96,7 @@ public class SentryServiceImpl implements SentryService {
         if (vkDeletePost.length == 1)
             vkEventsResponse.setDeletePostEventsCount(Long.parseLong(vkDeletePost[0].getCount()));
 
-        Long allEventsCount = vkEventsResponse.getUserInfoEventsCount() + vkEventsResponse.getCommentsOfPostEventsCount() +
+        long allEventsCount = vkEventsResponse.getUserInfoEventsCount() + vkEventsResponse.getCommentsOfPostEventsCount() +
                 vkEventsResponse.getCommentOfPostEventsCount() + vkEventsResponse.getSubCommentsEventsCount() +
                 vkEventsResponse.getSubCommentByIdEventsCount() + vkEventsResponse.getUserGroupsEventsCount() +
                 vkEventsResponse.getUserGroupEventsCount() + vkEventsResponse.getPostsEventsCount() +
@@ -175,7 +175,7 @@ public class SentryServiceImpl implements SentryService {
         if (fbDeletePost.length == 1)
             facebookEventsResponse.setDeletePostEventsCount(Long.parseLong(fbDeletePost[0].getCount()));
 
-        Long allEventsCount = facebookEventsResponse.getAllFacebookAccountEventsCount() +
+        long allEventsCount = facebookEventsResponse.getAllFacebookAccountEventsCount() +
                 facebookEventsResponse.getSaveAccountEventsCount() +
                 facebookEventsResponse.getRemoveAccountEventsCount() +
                 facebookEventsResponse.getUrlFormingEventsCount() +
