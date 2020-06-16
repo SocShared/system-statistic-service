@@ -4,11 +4,12 @@ import ml.socshared.stat.domain.response.SentryIssueResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @FeignClient(name = "sentry-client", url = "${sentry.url:}")
 public interface SentryFeignClient {
 
-   // @GetMapping(value = "/api/v1/test", produces = MediaType.APPLICATION_JSON_VALUE)
-  //  SentryIssueResponse
+    @GetMapping(value = "/api/0/projects/socshared/socshared-service/issues/")
+    SentryIssueResponse[] getIssues(@RequestParam(name = "query", required = false) String query);
 
 }
