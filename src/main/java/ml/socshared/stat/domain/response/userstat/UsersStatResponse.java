@@ -7,9 +7,9 @@ import lombok.Data;
 @Builder
 public class UsersStatResponse {
 
-    private Long onlineUsers;
-    private Long newUsers;
-    private Long activeUsers;
-    private Long allUsers;
+    private long onlineUsers;
+    private long newUsers;
+    private long activeUsers;
+    private long allUsers;
 
 }

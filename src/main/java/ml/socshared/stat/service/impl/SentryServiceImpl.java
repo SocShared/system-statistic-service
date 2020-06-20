@@ -62,7 +62,7 @@ public class SentryServiceImpl implements SentryService {
                     "server_name:"+SentryServerName.AUTH.value() + " type:" + SentryAuthTags.METRICS_USERS.value(),
                     token());
 
-            Map<String, Long> context = (HashMap) event.getContext();
+            Map<String, Integer> context = (HashMap) event.getContext();
 
             return UsersStatResponse.builder()
                     .activeUsers(context.get("active_users"))
