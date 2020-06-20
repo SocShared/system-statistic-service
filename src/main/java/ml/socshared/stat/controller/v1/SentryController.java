@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import ml.socshared.stat.api.v1.rest.SentryApi;
 
+import java.util.List;
+
 @RestController
 @RequestMapping(value = "/api/v1")
 @RequiredArgsConstructor
@@ -40,9 +42,21 @@ public class SentryController implements SentryApi {
     }
 
     @PreAuthorize("hasRole('SERVICE')")
+    @GetMapping(value = "/private/stat/users/online/timeline")
+    public List<UsersStatResponse> getOnlineUsersStatTimeline() {
+        return service.getOnlineUsersStatTimeline();
+    }
+
+    @PreAuthorize("hasRole('SERVICE')")
     @GetMapping(value = "/private/stat/users/active")
     public UsersStatResponse getActiveUsersStat() {
         return service.getActiveUsersStat();
+    }
+
+    @PreAuthorize("hasRole('SERVICE')")
+    @GetMapping(value = "/private/stat/users/active/timeline")
+    public List<UsersStatResponse> getActiveUsersStatTimeline() {
+        return service.getActiveUsersStatTimeline();
     }
 
     @PreAuthorize("hasRole('SERVICE')")
@@ -52,9 +66,21 @@ public class SentryController implements SentryApi {
     }
 
     @PreAuthorize("hasRole('SERVICE')")
+    @GetMapping(value = "/private/stat/users/new")
+    public List<UsersStatResponse> getNewUsersStatTimeline() {
+        return service.getNewUsersStatTimeline();
+    }
+
+    @PreAuthorize("hasRole('SERVICE')")
     @GetMapping(value = "/private/stat/users/all")
     public UsersStatResponse getAllUsersStat() {
         return service.getAllUsersStat();
+    }
+
+    @PreAuthorize("hasRole('SERVICE')")
+    @GetMapping(value = "/private/stat/users/all")
+    public List<UsersStatResponse> getAllUsersStatTimeline() {
+        return service.getAllUsersStatTimeline();
     }
 
     @PreAuthorize("hasRole('SERVICE')")
