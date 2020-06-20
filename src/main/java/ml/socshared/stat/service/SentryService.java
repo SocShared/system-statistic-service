@@ -9,7 +9,10 @@ public interface SentryService {
 
     SentryIssueResponse[] getIssues(String query);
     UsingSocialNetworkResponse getUsingSocialNetwork();
-    UsersStatResponse getUsersStat();
+    UsersStatResponse getOnlineUsersStat();
+    UsersStatResponse getActiveUsersStat();
+    UsersStatResponse getNewUsersStat();
+    UsersStatResponse getAllUsersStat();
     ErrorsStatResponse getErrorsStat();
 
 }

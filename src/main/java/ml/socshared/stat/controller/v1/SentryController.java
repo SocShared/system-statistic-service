@@ -34,9 +34,27 @@ public class SentryController implements SentryApi {
     }
 
     @PreAuthorize("hasRole('SERVICE')")
-    @GetMapping(value = "/private/stat/users")
-    public UsersStatResponse getUsersStat() {
-        return service.getUsersStat();
+    @GetMapping(value = "/private/stat/users/online")
+    public UsersStatResponse getOnlineUsersStat() {
+        return service.getOnlineUsersStat();
+    }
+
+    @PreAuthorize("hasRole('SERVICE')")
+    @GetMapping(value = "/private/stat/users/active")
+    public UsersStatResponse getActiveUsersStat() {
+        return service.getActiveUsersStat();
+    }
+
+    @PreAuthorize("hasRole('SERVICE')")
+    @GetMapping(value = "/private/stat/users/new")
+    public UsersStatResponse getNewUsersStat() {
+        return service.getNewUsersStat();
+    }
+
+    @PreAuthorize("hasRole('SERVICE')")
+    @GetMapping(value = "/private/stat/users/all")
+    public UsersStatResponse getAllUsersStat() {
+        return service.getAllUsersStat();
     }
 
     @PreAuthorize("hasRole('SERVICE')")

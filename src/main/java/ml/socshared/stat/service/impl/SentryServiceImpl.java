@@ -54,22 +54,79 @@ public class SentryServiceImpl implements SentryService {
     }
 
     @Override
-    public UsersStatResponse getUsersStat() {
+    public UsersStatResponse getOnlineUsersStat() {
         SentryIssueResponse[] issueResponse = client.getIssues("server_name:"+SentryServerName.AUTH.value() +
-                " type:" + SentryAuthTags.METRICS_USERS.value(), token());
+                " type:" + SentryAuthTags.ONLINE_USERS.value(), token());
 
         if (issueResponse.length == 1) {
             SentryEventResponse event = client.getEventLatest(issueResponse[0].getId(),
-                    "server_name:"+SentryServerName.AUTH.value() + " type:" + SentryAuthTags.METRICS_USERS.value(),
+                    "server_name:"+SentryServerName.AUTH.value() + " type:" + SentryAuthTags.ONLINE_USERS.value(),
                     token());
 
             Map<String, Integer> context = (HashMap) event.getContext();
 
             return UsersStatResponse.builder()
-                    .activeUsers(context.get("active_users"))
-                    .onlineUsers(context.get("online_users"))
-                    .newUsers(context.get("new_users"))
-                    .allUsers(context.get("all_users"))
+                    .onlineUsers(context.get("online_users").longValue())
+                    .build();
+        }
+
+        throw new HttpBadGatewayException("invalid users stat");
+    }
+
+    @Override
+    public UsersStatResponse getActiveUsersStat() {
+        SentryIssueResponse[] issueResponse = client.getIssues("server_name:"+SentryServerName.AUTH.value() +
+                " type:" + SentryAuthTags.ACTIVE_USERS.value(), token());
+
+        if (issueResponse.length == 1) {
+            SentryEventResponse event = client.getEventLatest(issueResponse[0].getId(),
+                    "server_name:"+SentryServerName.AUTH.value() + " type:" + SentryAuthTags.ACTIVE_USERS.value(),
+                    token());
+
+            Map<String, Integer> context = (HashMap) event.getContext();
+
+            return UsersStatResponse.builder()
+                    .activeUsers(context.get("active_users").longValue())
+                    .build();
+        }
+
+        throw new HttpBadGatewayException("invalid users stat");
+    }
+
+    @Override
+    public UsersStatResponse getNewUsersStat() {
+        SentryIssueResponse[] issueResponse = client.getIssues("server_name:"+SentryServerName.AUTH.value() +
+                " type:" + SentryAuthTags.NEW_USERS.value(), token());
+
+        if (issueResponse.length == 1) {
+            SentryEventResponse event = client.getEventLatest(issueResponse[0].getId(),
+                    "server_name:"+SentryServerName.AUTH.value() + " type:" + SentryAuthTags.NEW_USERS.value(),
+                    token());
+
+            Map<String, Integer> context = (HashMap) event.getContext();
+
+            return UsersStatResponse.builder()
+                    .newUsers(context.get("new_users").longValue())
+                    .build();
+        }
+
+        throw new HttpBadGatewayException("invalid users stat");
+    }
+
+    @Override
+    public UsersStatResponse getAllUsersStat() {
+        SentryIssueResponse[] issueResponse = client.getIssues("server_name:"+SentryServerName.AUTH.value() +
+                " type:" + SentryAuthTags.ALL_USERS.value(), token());
+
+        if (issueResponse.length == 1) {
+            SentryEventResponse event = client.getEventLatest(issueResponse[0].getId(),
+                    "server_name:"+SentryServerName.AUTH.value() + " type:" + SentryAuthTags.ALL_USERS.value(),
+                    token());
+
+            Map<String, Integer> context = (HashMap) event.getContext();
+
+            return UsersStatResponse.builder()
+                    .allUsers(context.get("all_users").longValue())
                     .build();
         }
 
