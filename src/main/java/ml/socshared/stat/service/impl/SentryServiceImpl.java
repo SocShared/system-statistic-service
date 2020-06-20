@@ -10,7 +10,6 @@ import ml.socshared.stat.domain.enums.tags.SentryVkTags;
 import ml.socshared.stat.domain.response.SentryEventResponse;
 import ml.socshared.stat.domain.response.SentryIssueResponse;
 import ml.socshared.stat.domain.response.UsingSocialNetworkResponse;
-import ml.socshared.stat.domain.response.errorstat.ErrorStatResponse;
 import ml.socshared.stat.domain.response.errorstat.ErrorsStatResponse;
 import ml.socshared.stat.domain.response.userstat.UsersStatResponse;
 import ml.socshared.stat.domain.response.usingsocial.FacebookEventsResponse;
@@ -300,25 +299,6 @@ public class SentryServiceImpl implements SentryService {
                         countGatewayErrors + countMailSenderErrors + countStorageErrors + countTechSupportErrors +
                         countTextAnalyzerErrors + countWorkerErrors)
                 .build();
-    }
-
-    @Override
-    public List<ErrorStatResponse> getErrorStatTimeline() {
-        SentryIssueResponse[] issueResponse = client.getIssues("level:error", token());
-
-        List<ErrorStatResponse> lists = new LinkedList<>();
-        for (SentryIssueResponse issue : issueResponse) {
-
-            ErrorStatResponse response = ErrorStatResponse.builder()
-                    .errorsCount(Long.parseLong(issue.getCount()))
-                    .dateTime(issue.getLastSeen())
-                    .build();
-
-            lists.add(response);
-        }
-
-        return lists;
-
     }
 
     private long countErrors(SentryIssueResponse[] errors) {
