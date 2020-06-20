@@ -25,5 +25,6 @@ public class SentryIssueResponse {
     @JsonSerialize(using = CustomLocalDateTimeSerializer.class)
     private LocalDateTime firstSeen;
     private String count;
+    private Object metadata;
 
 }

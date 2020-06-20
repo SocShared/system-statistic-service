@@ -10,6 +10,7 @@ import ml.socshared.stat.domain.enums.tags.SentryVkTags;
 import ml.socshared.stat.domain.response.SentryEventResponse;
 import ml.socshared.stat.domain.response.SentryIssueResponse;
 import ml.socshared.stat.domain.response.UsingSocialNetworkResponse;
+import ml.socshared.stat.domain.response.errorstat.ErrorsStatResponse;
 import ml.socshared.stat.domain.response.userstat.UsersStatResponse;
 import ml.socshared.stat.domain.response.usingsocial.FacebookEventsResponse;
 import ml.socshared.stat.domain.response.usingsocial.VkEventsResponse;
@@ -73,6 +74,63 @@ public class SentryServiceImpl implements SentryService {
         }
 
         throw new HttpBadGatewayException("invalid users stat");
+    }
+
+    @Override
+    public ErrorsStatResponse getErrorsStat() {
+        SentryIssueResponse[] authErrors = client.getIssues("server_name:"+SentryServerName.AUTH.value() + " level:error", token());
+        long countAuthErrors = countErrors(authErrors);
+
+        SentryIssueResponse[] vkAdapterErrors = client.getIssues("server_name:"+SentryServerName.VK_ADAPTER.value() + " level:error", token());
+        long countVkAdapterErrors = countErrors(vkAdapterErrors);
+
+        SentryIssueResponse[] fbAdapterErrors = client.getIssues("server_name:"+SentryServerName.FB_ADAPTER.value() + " level:error", token());
+        long countFbAdapterErrors = countErrors(fbAdapterErrors);
+
+        SentryIssueResponse[] workerErrors = client.getIssues("server_name:"+SentryServerName.WORKER.value() + " level:error", token());
+        long countWorkerErrors = countErrors(workerErrors);
+
+        SentryIssueResponse[] storageErrors = client.getIssues("server_name:"+SentryServerName.STORAGE.value() + " level:error", token());
+        long countStorageErrors = countErrors(storageErrors);
+
+        SentryIssueResponse[] bstatErrors = client.getIssues("server_name:"+SentryServerName.BSTAT.value() + " level:error", token());
+        long countBstatErrors = countErrors(bstatErrors);
+
+        SentryIssueResponse[] mailSenderErrors = client.getIssues("server_name:"+SentryServerName.MAIL_SENDER.value() + " level:error", token());
+        long countMailSenderErrors = countErrors(mailSenderErrors);
+
+        SentryIssueResponse[] gatewayErrors = client.getIssues("server_name:"+SentryServerName.GATEWAY.value() + " level:error", token());
+        long countGatewayErrors = countErrors(gatewayErrors);
+
+        SentryIssueResponse[] techSupportErrors = client.getIssues("server_name:"+SentryServerName.TECH_SUPPORT.value() + " level:error", token());
+        long countTechSupportErrors = countErrors(techSupportErrors);
+
+        SentryIssueResponse[] textAnalyzerErrors = client.getIssues("server_name:"+SentryServerName.TEXT_ANALYZER.value() + " level:error", token());
+        long countTextAnalyzerErrors = countErrors(textAnalyzerErrors);
+
+        return ErrorsStatResponse.builder()
+                .authErrorsCount(countAuthErrors)
+                .bstatErrorsCount(countBstatErrors)
+                .fbAdapterErrorsCount(countFbAdapterErrors)
+                .vkAdapterErrorsCount(countVkAdapterErrors)
+                .gatewayErrorsCount(countGatewayErrors)
+                .mailSenderErrorsCount(countMailSenderErrors)
+                .storageErrorsCount(countStorageErrors)
+                .techSupportErrorsCount(countTechSupportErrors)
+                .textAnalyzerErrorsCount(countTextAnalyzerErrors)
+                .workerErrorsCount(countWorkerErrors)
+                .allErrorsCount(countAuthErrors + countBstatErrors + countFbAdapterErrors + countVkAdapterErrors +
+                        countGatewayErrors + countMailSenderErrors + countStorageErrors + countTechSupportErrors +
+                        countTextAnalyzerErrors + countWorkerErrors)
+                .build();
+    }
+
+    private long countErrors(SentryIssueResponse[] errors) {
+        long count = 0;
+        for (SentryIssueResponse response : errors) {
+            count += Long.parseLong(response.getCount());
+        }
+        return count;
     }
 
     private VkEventsResponse findVkEvents() {
