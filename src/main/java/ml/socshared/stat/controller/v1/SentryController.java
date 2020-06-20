@@ -2,6 +2,7 @@ package ml.socshared.stat.controller.v1;
 
 import lombok.RequiredArgsConstructor;
 import ml.socshared.stat.domain.response.SentryIssueResponse;
+import ml.socshared.stat.domain.response.userstat.UsersStatResponse;
 import ml.socshared.stat.domain.response.UsingSocialNetworkResponse;
 import ml.socshared.stat.service.SentryService;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -29,6 +30,12 @@ public class SentryController implements SentryApi {
     @GetMapping(value = "/private/stat/social")
     public UsingSocialNetworkResponse getUsingSocialNetworkStat() {
         return service.getUsingSocialNetwork();
+    }
+
+    @PreAuthorize("hasRole('SERVICE')")
+    @GetMapping(value = "/private/stat/users")
+    public UsersStatResponse getUsersStat() {
+        return service.getUsersStat();
     }
 
 }

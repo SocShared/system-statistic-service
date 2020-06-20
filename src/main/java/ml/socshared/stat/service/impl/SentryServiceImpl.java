@@ -4,15 +4,22 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import ml.socshared.stat.client.SentryFeignClient;
 import ml.socshared.stat.domain.enums.SentryServerName;
+import ml.socshared.stat.domain.enums.tags.SentryAuthTags;
 import ml.socshared.stat.domain.enums.tags.SentryFacebookTags;
 import ml.socshared.stat.domain.enums.tags.SentryVkTags;
+import ml.socshared.stat.domain.response.SentryEventResponse;
 import ml.socshared.stat.domain.response.SentryIssueResponse;
 import ml.socshared.stat.domain.response.UsingSocialNetworkResponse;
+import ml.socshared.stat.domain.response.userstat.UsersStatResponse;
 import ml.socshared.stat.domain.response.usingsocial.FacebookEventsResponse;
 import ml.socshared.stat.domain.response.usingsocial.VkEventsResponse;
+import ml.socshared.stat.exception.impl.HttpBadGatewayException;
 import ml.socshared.stat.service.SentryService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -43,6 +50,29 @@ public class SentryServiceImpl implements SentryService {
                 .facebook(facebookEventsResponse)
                 .vk(vkEventsResponse)
                 .build();
+    }
+
+    @Override
+    public UsersStatResponse getUsersStat() {
+        SentryIssueResponse[] issueResponse = client.getIssues("server_name:"+SentryServerName.AUTH.value() +
+                " type:" + SentryAuthTags.METRICS_USERS.value(), token());
+
+        if (issueResponse.length == 1) {
+            SentryEventResponse event = client.getEventLatest(issueResponse[0].getId(),
+                    "server_name:"+SentryServerName.AUTH.value() + " type:" + SentryAuthTags.METRICS_USERS.value(),
+                    token());
+
+            Map<String, Long> context = (HashMap) event.getContext();
+
+            return UsersStatResponse.builder()
+                    .activeUsers(context.get("active_users"))
+                    .onlineUsers(context.get("online_users"))
+                    .newUsers(context.get("new_users"))
+                    .allUsers(context.get("all_users"))
+                    .build();
+        }
+
+        throw new HttpBadGatewayException("invalid users stat");
     }
 
     private VkEventsResponse findVkEvents() {
