@@ -66,7 +66,7 @@ public class SentryController implements SentryApi {
     }
 
     @PreAuthorize("hasRole('SERVICE')")
-    @GetMapping(value = "/private/stat/users/new")
+    @GetMapping(value = "/private/stat/users/new/timeline")
     public List<UsersStatResponse> getNewUsersStatTimeline() {
         return service.getNewUsersStatTimeline();
     }
@@ -78,7 +78,7 @@ public class SentryController implements SentryApi {
     }
 
     @PreAuthorize("hasRole('SERVICE')")
-    @GetMapping(value = "/private/stat/users/all")
+    @GetMapping(value = "/private/stat/users/all/timeline")
     public List<UsersStatResponse> getAllUsersStatTimeline() {
         return service.getAllUsersStatTimeline();
     }
