@@ -10,6 +10,7 @@ import ml.socshared.stat.domain.enums.tags.SentryVkTags;
 import ml.socshared.stat.domain.response.SentryEventResponse;
 import ml.socshared.stat.domain.response.SentryIssueResponse;
 import ml.socshared.stat.domain.response.UsingSocialNetworkResponse;
+import ml.socshared.stat.domain.response.errorstat.ErrorStatResponse;
 import ml.socshared.stat.domain.response.errorstat.ErrorsStatResponse;
 import ml.socshared.stat.domain.response.userstat.UsersStatResponse;
 import ml.socshared.stat.domain.response.usingsocial.FacebookEventsResponse;
@@ -54,12 +55,12 @@ public class SentryServiceImpl implements SentryService {
 
     @Override
     public UsersStatResponse getOnlineUsersStat() {
-        SentryIssueResponse[] issueResponse = client.getIssues("server_name:"+SentryServerName.AUTH.value() +
+        SentryIssueResponse[] issueResponse = client.getIssues("server_name:" + SentryServerName.AUTH.value() +
                 " type:" + SentryAuthTags.ONLINE_USERS.value(), token());
 
         if (issueResponse.length == 1) {
             SentryEventResponse event = client.getEventLatest(issueResponse[0].getId(),
-                    "server_name:"+SentryServerName.AUTH.value() + " type:" + SentryAuthTags.ONLINE_USERS.value(),
+                    "server_name:" + SentryServerName.AUTH.value() + " type:" + SentryAuthTags.ONLINE_USERS.value(),
                     token());
 
             Map<String, Integer> context = (HashMap) event.getContext();
@@ -74,12 +75,12 @@ public class SentryServiceImpl implements SentryService {
 
     @Override
     public List<UsersStatResponse> getOnlineUsersStatTimeline() {
-        SentryIssueResponse[] issueResponse = client.getIssues("server_name:"+SentryServerName.AUTH.value() +
+        SentryIssueResponse[] issueResponse = client.getIssues("server_name:" + SentryServerName.AUTH.value() +
                 " type:" + SentryAuthTags.ONLINE_USERS.value(), token());
 
         if (issueResponse.length == 1) {
             SentryEventResponse[] events = client.getEvents(issueResponse[0].getId(),
-                    "server_name:"+SentryServerName.AUTH.value() + " type:" + SentryAuthTags.ONLINE_USERS.value(),
+                    "server_name:" + SentryServerName.AUTH.value() + " type:" + SentryAuthTags.ONLINE_USERS.value(),
                     token());
 
             List<UsersStatResponse> lists = new LinkedList<>();
@@ -104,12 +105,12 @@ public class SentryServiceImpl implements SentryService {
 
     @Override
     public UsersStatResponse getActiveUsersStat() {
-        SentryIssueResponse[] issueResponse = client.getIssues("server_name:"+SentryServerName.AUTH.value() +
+        SentryIssueResponse[] issueResponse = client.getIssues("server_name:" + SentryServerName.AUTH.value() +
                 " type:" + SentryAuthTags.ACTIVE_USERS.value(), token());
 
         if (issueResponse.length == 1) {
             SentryEventResponse event = client.getEventLatest(issueResponse[0].getId(),
-                    "server_name:"+SentryServerName.AUTH.value() + " type:" + SentryAuthTags.ACTIVE_USERS.value(),
+                    "server_name:" + SentryServerName.AUTH.value() + " type:" + SentryAuthTags.ACTIVE_USERS.value(),
                     token());
 
             Map<String, Integer> context = (HashMap) event.getContext();
@@ -124,12 +125,12 @@ public class SentryServiceImpl implements SentryService {
 
     @Override
     public List<UsersStatResponse> getActiveUsersStatTimeline() {
-        SentryIssueResponse[] issueResponse = client.getIssues("server_name:"+SentryServerName.AUTH.value() +
+        SentryIssueResponse[] issueResponse = client.getIssues("server_name:" + SentryServerName.AUTH.value() +
                 " type:" + SentryAuthTags.ACTIVE_USERS.value(), token());
 
         if (issueResponse.length == 1) {
             SentryEventResponse[] events = client.getEvents(issueResponse[0].getId(),
-                    "server_name:"+SentryServerName.AUTH.value() + " type:" + SentryAuthTags.ACTIVE_USERS.value(),
+                    "server_name:" + SentryServerName.AUTH.value() + " type:" + SentryAuthTags.ACTIVE_USERS.value(),
                     token());
 
             List<UsersStatResponse> lists = new LinkedList<>();
@@ -154,12 +155,12 @@ public class SentryServiceImpl implements SentryService {
 
     @Override
     public UsersStatResponse getNewUsersStat() {
-        SentryIssueResponse[] issueResponse = client.getIssues("server_name:"+SentryServerName.AUTH.value() +
+        SentryIssueResponse[] issueResponse = client.getIssues("server_name:" + SentryServerName.AUTH.value() +
                 " type:" + SentryAuthTags.NEW_USERS.value(), token());
 
         if (issueResponse.length == 1) {
             SentryEventResponse event = client.getEventLatest(issueResponse[0].getId(),
-                    "server_name:"+SentryServerName.AUTH.value() + " type:" + SentryAuthTags.NEW_USERS.value(),
+                    "server_name:" + SentryServerName.AUTH.value() + " type:" + SentryAuthTags.NEW_USERS.value(),
                     token());
 
             Map<String, Integer> context = (HashMap) event.getContext();
@@ -174,12 +175,12 @@ public class SentryServiceImpl implements SentryService {
 
     @Override
     public List<UsersStatResponse> getNewUsersStatTimeline() {
-        SentryIssueResponse[] issueResponse = client.getIssues("server_name:"+SentryServerName.AUTH.value() +
+        SentryIssueResponse[] issueResponse = client.getIssues("server_name:" + SentryServerName.AUTH.value() +
                 " type:" + SentryAuthTags.NEW_USERS.value(), token());
 
         if (issueResponse.length == 1) {
             SentryEventResponse[] events = client.getEvents(issueResponse[0].getId(),
-                    "server_name:"+SentryServerName.AUTH.value() + " type:" + SentryAuthTags.NEW_USERS.value(),
+                    "server_name:" + SentryServerName.AUTH.value() + " type:" + SentryAuthTags.NEW_USERS.value(),
                     token());
 
             List<UsersStatResponse> lists = new LinkedList<>();
@@ -204,12 +205,12 @@ public class SentryServiceImpl implements SentryService {
 
     @Override
     public UsersStatResponse getAllUsersStat() {
-        SentryIssueResponse[] issueResponse = client.getIssues("server_name:"+SentryServerName.AUTH.value() +
+        SentryIssueResponse[] issueResponse = client.getIssues("server_name:" + SentryServerName.AUTH.value() +
                 " type:" + SentryAuthTags.ALL_USERS.value(), token());
 
         if (issueResponse.length == 1) {
             SentryEventResponse event = client.getEventLatest(issueResponse[0].getId(),
-                    "server_name:"+SentryServerName.AUTH.value() + " type:" + SentryAuthTags.ALL_USERS.value(),
+                    "server_name:" + SentryServerName.AUTH.value() + " type:" + SentryAuthTags.ALL_USERS.value(),
                     token());
 
             Map<String, Integer> context = (HashMap) event.getContext();
@@ -224,12 +225,12 @@ public class SentryServiceImpl implements SentryService {
 
     @Override
     public List<UsersStatResponse> getAllUsersStatTimeline() {
-        SentryIssueResponse[] issueResponse = client.getIssues("server_name:"+SentryServerName.AUTH.value() +
+        SentryIssueResponse[] issueResponse = client.getIssues("server_name:" + SentryServerName.AUTH.value() +
                 " type:" + SentryAuthTags.ALL_USERS.value(), token());
 
         if (issueResponse.length == 1) {
             SentryEventResponse[] events = client.getEvents(issueResponse[0].getId(),
-                    "server_name:"+SentryServerName.AUTH.value() + " type:" + SentryAuthTags.ALL_USERS.value(),
+                    "server_name:" + SentryServerName.AUTH.value() + " type:" + SentryAuthTags.ALL_USERS.value(),
                     token());
 
             List<UsersStatResponse> lists = new LinkedList<>();
@@ -254,34 +255,34 @@ public class SentryServiceImpl implements SentryService {
 
     @Override
     public ErrorsStatResponse getErrorsStat() {
-        SentryIssueResponse[] authErrors = client.getIssues("server_name:"+SentryServerName.AUTH.value() + " level:error", token());
+        SentryIssueResponse[] authErrors = client.getIssues("server_name:" + SentryServerName.AUTH.value() + " level:error", token());
         long countAuthErrors = countErrors(authErrors);
 
-        SentryIssueResponse[] vkAdapterErrors = client.getIssues("server_name:"+SentryServerName.VK_ADAPTER.value() + " level:error", token());
+        SentryIssueResponse[] vkAdapterErrors = client.getIssues("server_name:" + SentryServerName.VK_ADAPTER.value() + " level:error", token());
         long countVkAdapterErrors = countErrors(vkAdapterErrors);
 
-        SentryIssueResponse[] fbAdapterErrors = client.getIssues("server_name:"+SentryServerName.FB_ADAPTER.value() + " level:error", token());
+        SentryIssueResponse[] fbAdapterErrors = client.getIssues("server_name:" + SentryServerName.FB_ADAPTER.value() + " level:error", token());
         long countFbAdapterErrors = countErrors(fbAdapterErrors);
 
-        SentryIssueResponse[] workerErrors = client.getIssues("server_name:"+SentryServerName.WORKER.value() + " level:error", token());
+        SentryIssueResponse[] workerErrors = client.getIssues("server_name:" + SentryServerName.WORKER.value() + " level:error", token());
         long countWorkerErrors = countErrors(workerErrors);
 
-        SentryIssueResponse[] storageErrors = client.getIssues("server_name:"+SentryServerName.STORAGE.value() + " level:error", token());
+        SentryIssueResponse[] storageErrors = client.getIssues("server_name:" + SentryServerName.STORAGE.value() + " level:error", token());
         long countStorageErrors = countErrors(storageErrors);
 
-        SentryIssueResponse[] bstatErrors = client.getIssues("server_name:"+SentryServerName.BSTAT.value() + " level:error", token());
+        SentryIssueResponse[] bstatErrors = client.getIssues("server_name:" + SentryServerName.BSTAT.value() + " level:error", token());
         long countBstatErrors = countErrors(bstatErrors);
 
-        SentryIssueResponse[] mailSenderErrors = client.getIssues("server_name:"+SentryServerName.MAIL_SENDER.value() + " level:error", token());
+        SentryIssueResponse[] mailSenderErrors = client.getIssues("server_name:" + SentryServerName.MAIL_SENDER.value() + " level:error", token());
         long countMailSenderErrors = countErrors(mailSenderErrors);
 
-        SentryIssueResponse[] gatewayErrors = client.getIssues("server_name:"+SentryServerName.GATEWAY.value() + " level:error", token());
+        SentryIssueResponse[] gatewayErrors = client.getIssues("server_name:" + SentryServerName.GATEWAY.value() + " level:error", token());
         long countGatewayErrors = countErrors(gatewayErrors);
 
-        SentryIssueResponse[] techSupportErrors = client.getIssues("server_name:"+SentryServerName.TECH_SUPPORT.value() + " level:error", token());
+        SentryIssueResponse[] techSupportErrors = client.getIssues("server_name:" + SentryServerName.TECH_SUPPORT.value() + " level:error", token());
         long countTechSupportErrors = countErrors(techSupportErrors);
 
-        SentryIssueResponse[] textAnalyzerErrors = client.getIssues("server_name:"+SentryServerName.TEXT_ANALYZER.value() + " level:error", token());
+        SentryIssueResponse[] textAnalyzerErrors = client.getIssues("server_name:" + SentryServerName.TEXT_ANALYZER.value() + " level:error", token());
         long countTextAnalyzerErrors = countErrors(textAnalyzerErrors);
 
         return ErrorsStatResponse.builder()
@@ -301,6 +302,25 @@ public class SentryServiceImpl implements SentryService {
                 .build();
     }
 
+    @Override
+    public List<ErrorStatResponse> getErrorStatTimeline() {
+        SentryIssueResponse[] issueResponse = client.getIssues("level:error", token());
+
+        List<ErrorStatResponse> lists = new LinkedList<>();
+        for (SentryIssueResponse issue : issueResponse) {
+
+            ErrorStatResponse response = ErrorStatResponse.builder()
+                    .errorsCount(Long.parseLong(issue.getCount()))
+                    .dateTime(issue.getLastSeen())
+                    .build();
+
+            lists.add(response);
+        }
+
+        return lists;
+
+    }
+
     private long countErrors(SentryIssueResponse[] errors) {
         long count = 0;
         for (SentryIssueResponse response : errors) {
@@ -312,51 +332,51 @@ public class SentryServiceImpl implements SentryService {
     private VkEventsResponse findVkEvents() {
         VkEventsResponse vkEventsResponse = new VkEventsResponse();
 
-        SentryIssueResponse[] vkUserInfo = client.getIssues("server_name:"+SentryServerName.VK_ADAPTER.value()+" type:" + SentryVkTags.GET_USER_INFO.value(), token());
+        SentryIssueResponse[] vkUserInfo = client.getIssues("server_name:" + SentryServerName.VK_ADAPTER.value() + " type:" + SentryVkTags.GET_USER_INFO.value(), token());
         if (vkUserInfo.length == 1)
             vkEventsResponse.setUserInfoEventsCount(Long.parseLong(vkUserInfo[0].getCount()));
 
-        SentryIssueResponse[] vkCommentsOfPost = client.getIssues("server_name:"+SentryServerName.VK_ADAPTER.value()+" type:" + SentryVkTags.COMMENTS_OF_POST.value(), token());
+        SentryIssueResponse[] vkCommentsOfPost = client.getIssues("server_name:" + SentryServerName.VK_ADAPTER.value() + " type:" + SentryVkTags.COMMENTS_OF_POST.value(), token());
         if (vkCommentsOfPost.length == 1)
             vkEventsResponse.setCommentsOfPostEventsCount(Long.parseLong(vkCommentsOfPost[0].getCount()));
 
-        SentryIssueResponse[] vkCommentOfPost = client.getIssues("server_name:"+SentryServerName.VK_ADAPTER.value()+" type:" + SentryVkTags.COMMENT_OF_POST.value(), token());
+        SentryIssueResponse[] vkCommentOfPost = client.getIssues("server_name:" + SentryServerName.VK_ADAPTER.value() + " type:" + SentryVkTags.COMMENT_OF_POST.value(), token());
         if (vkCommentOfPost.length == 1)
             vkEventsResponse.setCommentOfPostEventsCount(Long.parseLong(vkCommentOfPost[0].getCount()));
 
-        SentryIssueResponse[] vkSubComments = client.getIssues("server_name:"+SentryServerName.VK_ADAPTER.value()+" type:" + SentryVkTags.GET_SUB_COMMENTS.value(), token());
+        SentryIssueResponse[] vkSubComments = client.getIssues("server_name:" + SentryServerName.VK_ADAPTER.value() + " type:" + SentryVkTags.GET_SUB_COMMENTS.value(), token());
         if (vkSubComments.length == 1)
             vkEventsResponse.setSubCommentsEventsCount(Long.parseLong(vkSubComments[0].getCount()));
 
-        SentryIssueResponse[] vkSumCommentById = client.getIssues("server_name:"+SentryServerName.VK_ADAPTER.value()+" type:" + SentryVkTags.GET_SUB_COMMENT_BY_ID.value(), token());
+        SentryIssueResponse[] vkSumCommentById = client.getIssues("server_name:" + SentryServerName.VK_ADAPTER.value() + " type:" + SentryVkTags.GET_SUB_COMMENT_BY_ID.value(), token());
         if (vkSumCommentById.length == 1)
             vkEventsResponse.setSubCommentByIdEventsCount(Long.parseLong(vkSumCommentById[0].getCount()));
 
-        SentryIssueResponse[] vkUserGroups = client.getIssues("server_name:"+SentryServerName.VK_ADAPTER.value()+" type:" + SentryVkTags.GET_USER_GROUPS.value(), token());
+        SentryIssueResponse[] vkUserGroups = client.getIssues("server_name:" + SentryServerName.VK_ADAPTER.value() + " type:" + SentryVkTags.GET_USER_GROUPS.value(), token());
         if (vkUserGroups.length == 1)
             vkEventsResponse.setUserGroupsEventsCount(Long.parseLong(vkUserGroups[0].getCount()));
 
-        SentryIssueResponse[] vkUserGroup = client.getIssues("server_name:"+SentryServerName.VK_ADAPTER.value()+" type:" + SentryVkTags.GET_USER_GROUP.value(), token());
+        SentryIssueResponse[] vkUserGroup = client.getIssues("server_name:" + SentryServerName.VK_ADAPTER.value() + " type:" + SentryVkTags.GET_USER_GROUP.value(), token());
         if (vkUserGroup.length == 1)
             vkEventsResponse.setUserGroupEventsCount(Long.parseLong(vkUserGroup[0].getCount()));
 
-        SentryIssueResponse[] vkPosts = client.getIssues("server_name:"+SentryServerName.VK_ADAPTER.value()+" type:" + SentryVkTags.GET_POSTS.value(), token());
+        SentryIssueResponse[] vkPosts = client.getIssues("server_name:" + SentryServerName.VK_ADAPTER.value() + " type:" + SentryVkTags.GET_POSTS.value(), token());
         if (vkPosts.length == 1)
             vkEventsResponse.setPostsEventsCount(Long.parseLong(vkPosts[0].getCount()));
 
-        SentryIssueResponse[] vkPost = client.getIssues("server_name:"+SentryServerName.VK_ADAPTER.value()+" type:" + SentryVkTags.GET_POST.value(), token());
+        SentryIssueResponse[] vkPost = client.getIssues("server_name:" + SentryServerName.VK_ADAPTER.value() + " type:" + SentryVkTags.GET_POST.value(), token());
         if (vkPost.length == 1)
             vkEventsResponse.setPostByIdEventsCount(Long.parseLong(vkPost[0].getCount()));
 
-        SentryIssueResponse[] vkAddPost = client.getIssues("server_name:"+SentryServerName.VK_ADAPTER.value()+" type:" + SentryVkTags.ADD_POST.value(), token());
+        SentryIssueResponse[] vkAddPost = client.getIssues("server_name:" + SentryServerName.VK_ADAPTER.value() + " type:" + SentryVkTags.ADD_POST.value(), token());
         if (vkAddPost.length == 1)
             vkEventsResponse.setAddPostEventsCount(Long.parseLong(vkAddPost[0].getCount()));
 
-        SentryIssueResponse[] vkUpdatePost = client.getIssues("server_name:"+SentryServerName.VK_ADAPTER.value()+" type:" + SentryVkTags.UPDATE_POST.value(), token());
+        SentryIssueResponse[] vkUpdatePost = client.getIssues("server_name:" + SentryServerName.VK_ADAPTER.value() + " type:" + SentryVkTags.UPDATE_POST.value(), token());
         if (vkUpdatePost.length == 1)
             vkEventsResponse.setUpdatePostEventsCount(Long.parseLong(vkUpdatePost[0].getCount()));
 
-        SentryIssueResponse[] vkDeletePost = client.getIssues("server_name:"+SentryServerName.VK_ADAPTER.value()+" type:" + SentryVkTags.DELETE_POST.value(), token());
+        SentryIssueResponse[] vkDeletePost = client.getIssues("server_name:" + SentryServerName.VK_ADAPTER.value() + " type:" + SentryVkTags.DELETE_POST.value(), token());
         if (vkDeletePost.length == 1)
             vkEventsResponse.setDeletePostEventsCount(Long.parseLong(vkDeletePost[0].getCount()));
 
@@ -375,83 +395,83 @@ public class SentryServiceImpl implements SentryService {
     private FacebookEventsResponse findFacebookEvents() {
         FacebookEventsResponse facebookEventsResponse = new FacebookEventsResponse();
 
-        SentryIssueResponse[] fbAllFacebookAccount = client.getIssues("server_name:"+SentryServerName.FB_ADAPTER.value()+" type:" + SentryFacebookTags.GET_ALL_FACEBOOK_ACCOUNT.value(), token());
-        log.info("query: server_name:"+SentryServerName.FB_ADAPTER.value()+" type:" + SentryFacebookTags.GET_ALL_FACEBOOK_ACCOUNT.value());
+        SentryIssueResponse[] fbAllFacebookAccount = client.getIssues("server_name:" + SentryServerName.FB_ADAPTER.value() + " type:" + SentryFacebookTags.GET_ALL_FACEBOOK_ACCOUNT.value(), token());
+        log.info("query: server_name:" + SentryServerName.FB_ADAPTER.value() + " type:" + SentryFacebookTags.GET_ALL_FACEBOOK_ACCOUNT.value());
         if (fbAllFacebookAccount.length == 1)
             facebookEventsResponse.setAllFacebookAccountEventsCount(Long.parseLong(fbAllFacebookAccount[0].getCount()));
 
-        SentryIssueResponse[] fbSaveAccount = client.getIssues("server_name:"+SentryServerName.FB_ADAPTER.value()+" type:" + SentryFacebookTags.SAVE_ACCOUNT.value(), token());
-        log.info("query: server_name:"+SentryServerName.FB_ADAPTER.value()+" type:" + SentryFacebookTags.SAVE_ACCOUNT.value());
+        SentryIssueResponse[] fbSaveAccount = client.getIssues("server_name:" + SentryServerName.FB_ADAPTER.value() + " type:" + SentryFacebookTags.SAVE_ACCOUNT.value(), token());
+        log.info("query: server_name:" + SentryServerName.FB_ADAPTER.value() + " type:" + SentryFacebookTags.SAVE_ACCOUNT.value());
         if (fbSaveAccount.length == 1)
             facebookEventsResponse.setSaveAccountEventsCount(Long.parseLong(fbSaveAccount[0].getCount()));
 
-        SentryIssueResponse[] fbRemoveAccount = client.getIssues("server_name:"+SentryServerName.FB_ADAPTER.value()+" type:" + SentryFacebookTags.REMOVE_ACCOUNT.value(), token());
-        log.info("query: server_name:"+SentryServerName.FB_ADAPTER.value()+" type:" + SentryFacebookTags.REMOVE_ACCOUNT.value());
+        SentryIssueResponse[] fbRemoveAccount = client.getIssues("server_name:" + SentryServerName.FB_ADAPTER.value() + " type:" + SentryFacebookTags.REMOVE_ACCOUNT.value(), token());
+        log.info("query: server_name:" + SentryServerName.FB_ADAPTER.value() + " type:" + SentryFacebookTags.REMOVE_ACCOUNT.value());
         if (fbRemoveAccount.length == 1)
             facebookEventsResponse.setRemoveAccountEventsCount(Long.parseLong(fbRemoveAccount[0].getCount()));
 
-        SentryIssueResponse[] fbUrlForming = client.getIssues("server_name:"+SentryServerName.FB_ADAPTER.value()+" type:" + SentryFacebookTags.URL_FORMING.value(), token());
-        log.info("query: server_name:"+SentryServerName.FB_ADAPTER.value()+" type:" + SentryFacebookTags.URL_FORMING.value());
+        SentryIssueResponse[] fbUrlForming = client.getIssues("server_name:" + SentryServerName.FB_ADAPTER.value() + " type:" + SentryFacebookTags.URL_FORMING.value(), token());
+        log.info("query: server_name:" + SentryServerName.FB_ADAPTER.value() + " type:" + SentryFacebookTags.URL_FORMING.value());
         if (fbUrlForming.length == 1)
             facebookEventsResponse.setUrlFormingEventsCount(Long.parseLong(fbUrlForming[0].getCount()));
 
-        SentryIssueResponse[] fbUserInfo = client.getIssues("server_name:"+SentryServerName.FB_ADAPTER.value()+" type:" + SentryFacebookTags.GET_USER_INFO.value(), token());
-        log.info("query: server_name:"+SentryServerName.FB_ADAPTER.value()+" type:" + SentryFacebookTags.GET_USER_INFO.value());
+        SentryIssueResponse[] fbUserInfo = client.getIssues("server_name:" + SentryServerName.FB_ADAPTER.value() + " type:" + SentryFacebookTags.GET_USER_INFO.value(), token());
+        log.info("query: server_name:" + SentryServerName.FB_ADAPTER.value() + " type:" + SentryFacebookTags.GET_USER_INFO.value());
         if (fbUserInfo.length == 1)
             facebookEventsResponse.setUserInfoEventsCount(Long.parseLong(fbUserInfo[0].getCount()));
 
-        SentryIssueResponse[] fbCommentsOfPost = client.getIssues("server_name:"+SentryServerName.FB_ADAPTER.value()+" type:" + SentryFacebookTags.COMMENTS_OF_POST.value(), token());
-        log.info("query: server_name:"+SentryServerName.FB_ADAPTER.value()+" type:" + SentryFacebookTags.COMMENTS_OF_POST.value());
+        SentryIssueResponse[] fbCommentsOfPost = client.getIssues("server_name:" + SentryServerName.FB_ADAPTER.value() + " type:" + SentryFacebookTags.COMMENTS_OF_POST.value(), token());
+        log.info("query: server_name:" + SentryServerName.FB_ADAPTER.value() + " type:" + SentryFacebookTags.COMMENTS_OF_POST.value());
         if (fbCommentsOfPost.length == 1)
             facebookEventsResponse.setCommentsOfPostEventsCount(Long.parseLong(fbCommentsOfPost[0].getCount()));
 
-        SentryIssueResponse[] fbCommentOfPost = client.getIssues("server_name:"+SentryServerName.FB_ADAPTER.value()+" type:" + SentryFacebookTags.COMMENT_OF_POST.value(), token());
-        log.info("query: server_name:"+SentryServerName.FB_ADAPTER.value()+" type:" + SentryFacebookTags.COMMENT_OF_POST.value());
+        SentryIssueResponse[] fbCommentOfPost = client.getIssues("server_name:" + SentryServerName.FB_ADAPTER.value() + " type:" + SentryFacebookTags.COMMENT_OF_POST.value(), token());
+        log.info("query: server_name:" + SentryServerName.FB_ADAPTER.value() + " type:" + SentryFacebookTags.COMMENT_OF_POST.value());
         if (fbCommentOfPost.length == 1)
             facebookEventsResponse.setCommentOfPostEventsCount(Long.parseLong(fbCommentOfPost[0].getCount()));
 
-        SentryIssueResponse[] fbSubComments = client.getIssues("server_name:"+SentryServerName.FB_ADAPTER.value()+" type:" + SentryFacebookTags.GET_SUB_COMMENTS.value(), token());
-        log.info("query: server_name:"+SentryServerName.FB_ADAPTER.value()+" type:" + SentryFacebookTags.GET_SUB_COMMENTS.value());
+        SentryIssueResponse[] fbSubComments = client.getIssues("server_name:" + SentryServerName.FB_ADAPTER.value() + " type:" + SentryFacebookTags.GET_SUB_COMMENTS.value(), token());
+        log.info("query: server_name:" + SentryServerName.FB_ADAPTER.value() + " type:" + SentryFacebookTags.GET_SUB_COMMENTS.value());
         if (fbSubComments.length == 1)
             facebookEventsResponse.setSubCommentsEventsCount(Long.parseLong(fbSubComments[0].getCount()));
 
-        SentryIssueResponse[] fbSumCommentById = client.getIssues("server_name:"+SentryServerName.FB_ADAPTER.value()+" type:" + SentryFacebookTags.GET_SUB_COMMENT_BY_ID.value(), token());
-        log.info("query: server_name:"+SentryServerName.FB_ADAPTER.value()+" type:" + SentryFacebookTags.GET_SUB_COMMENT_BY_ID.value());
+        SentryIssueResponse[] fbSumCommentById = client.getIssues("server_name:" + SentryServerName.FB_ADAPTER.value() + " type:" + SentryFacebookTags.GET_SUB_COMMENT_BY_ID.value(), token());
+        log.info("query: server_name:" + SentryServerName.FB_ADAPTER.value() + " type:" + SentryFacebookTags.GET_SUB_COMMENT_BY_ID.value());
         if (fbSumCommentById.length == 1)
             facebookEventsResponse.setSubCommentByIdEventsCount(Long.parseLong(fbSumCommentById[0].getCount()));
 
-        SentryIssueResponse[] fbUserGroups = client.getIssues("server_name:"+SentryServerName.FB_ADAPTER.value()+" type:" + SentryFacebookTags.GET_USER_GROUPS.value(), token());
-        log.info("query: server_name:"+SentryServerName.FB_ADAPTER.value()+" type:" + SentryFacebookTags.GET_USER_GROUPS.value());
+        SentryIssueResponse[] fbUserGroups = client.getIssues("server_name:" + SentryServerName.FB_ADAPTER.value() + " type:" + SentryFacebookTags.GET_USER_GROUPS.value(), token());
+        log.info("query: server_name:" + SentryServerName.FB_ADAPTER.value() + " type:" + SentryFacebookTags.GET_USER_GROUPS.value());
         if (fbUserGroups.length == 1)
             facebookEventsResponse.setUserGroupsEventsCount(Long.parseLong(fbUserGroups[0].getCount()));
 
-        SentryIssueResponse[] fbUserGroup = client.getIssues("server_name:"+SentryServerName.FB_ADAPTER.value()+" type:" + SentryFacebookTags.GET_USER_GROUP.value(), token());
-        log.info("query: server_name:"+SentryServerName.FB_ADAPTER.value()+" type:" + SentryFacebookTags.GET_USER_GROUP.value());
+        SentryIssueResponse[] fbUserGroup = client.getIssues("server_name:" + SentryServerName.FB_ADAPTER.value() + " type:" + SentryFacebookTags.GET_USER_GROUP.value(), token());
+        log.info("query: server_name:" + SentryServerName.FB_ADAPTER.value() + " type:" + SentryFacebookTags.GET_USER_GROUP.value());
         if (fbUserGroup.length == 1)
             facebookEventsResponse.setUserGroupEventsCount(Long.parseLong(fbUserGroup[0].getCount()));
 
-        SentryIssueResponse[] fbPosts = client.getIssues("server_name:"+SentryServerName.FB_ADAPTER.value()+" type:" + SentryFacebookTags.GET_POSTS.value(), token());
-        log.info("query: server_name:"+SentryServerName.FB_ADAPTER.value()+" type:" + SentryFacebookTags.GET_POSTS.value());
+        SentryIssueResponse[] fbPosts = client.getIssues("server_name:" + SentryServerName.FB_ADAPTER.value() + " type:" + SentryFacebookTags.GET_POSTS.value(), token());
+        log.info("query: server_name:" + SentryServerName.FB_ADAPTER.value() + " type:" + SentryFacebookTags.GET_POSTS.value());
         if (fbPosts.length == 1)
             facebookEventsResponse.setPostsEventsCount(Long.parseLong(fbPosts[0].getCount()));
 
-        SentryIssueResponse[] fbPost = client.getIssues("server_name:"+SentryServerName.FB_ADAPTER.value()+" type:" + SentryFacebookTags.GET_POST.value(), token());
-        log.info("query: server_name:"+SentryServerName.FB_ADAPTER.value()+" type:" + SentryFacebookTags.GET_POST.value());
+        SentryIssueResponse[] fbPost = client.getIssues("server_name:" + SentryServerName.FB_ADAPTER.value() + " type:" + SentryFacebookTags.GET_POST.value(), token());
+        log.info("query: server_name:" + SentryServerName.FB_ADAPTER.value() + " type:" + SentryFacebookTags.GET_POST.value());
         if (fbPost.length == 1)
             facebookEventsResponse.setPostByIdEventsCount(Long.parseLong(fbPost[0].getCount()));
 
-        SentryIssueResponse[] fbAddPost = client.getIssues("server_name:"+SentryServerName.FB_ADAPTER.value()+" type:" + SentryFacebookTags.ADD_POST.value(), token());
-        log.info("query: server_name:"+SentryServerName.FB_ADAPTER.value()+" type:" + SentryFacebookTags.ADD_POST.value());
+        SentryIssueResponse[] fbAddPost = client.getIssues("server_name:" + SentryServerName.FB_ADAPTER.value() + " type:" + SentryFacebookTags.ADD_POST.value(), token());
+        log.info("query: server_name:" + SentryServerName.FB_ADAPTER.value() + " type:" + SentryFacebookTags.ADD_POST.value());
         if (fbAddPost.length == 1)
             facebookEventsResponse.setAddPostEventsCount(Long.parseLong(fbAddPost[0].getCount()));
 
-        SentryIssueResponse[] fbUpdatePost = client.getIssues("server_name:"+SentryServerName.FB_ADAPTER.value()+" type:" + SentryFacebookTags.UPDATE_POST.value(), token());
-        log.info("query: server_name:"+SentryServerName.FB_ADAPTER.value()+" type:" + SentryFacebookTags.UPDATE_POST.value());
+        SentryIssueResponse[] fbUpdatePost = client.getIssues("server_name:" + SentryServerName.FB_ADAPTER.value() + " type:" + SentryFacebookTags.UPDATE_POST.value(), token());
+        log.info("query: server_name:" + SentryServerName.FB_ADAPTER.value() + " type:" + SentryFacebookTags.UPDATE_POST.value());
         if (fbUpdatePost.length == 1)
             facebookEventsResponse.setUpdatePostEventsCount(Long.parseLong(fbUpdatePost[0].getCount()));
 
-        SentryIssueResponse[] fbDeletePost = client.getIssues("server_name:"+SentryServerName.FB_ADAPTER.value()+" type:" + SentryFacebookTags.DELETE_POST.value(), token());
-        log.info("query: server_name:"+SentryServerName.FB_ADAPTER.value()+" type:" + SentryFacebookTags.DELETE_POST.value());
+        SentryIssueResponse[] fbDeletePost = client.getIssues("server_name:" + SentryServerName.FB_ADAPTER.value() + " type:" + SentryFacebookTags.DELETE_POST.value(), token());
+        log.info("query: server_name:" + SentryServerName.FB_ADAPTER.value() + " type:" + SentryFacebookTags.DELETE_POST.value());
         if (fbDeletePost.length == 1)
             facebookEventsResponse.setDeletePostEventsCount(Long.parseLong(fbDeletePost[0].getCount()));
 

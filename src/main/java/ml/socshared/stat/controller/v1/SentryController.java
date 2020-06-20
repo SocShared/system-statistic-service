@@ -1,6 +1,7 @@
 package ml.socshared.stat.controller.v1;
 
 import lombok.RequiredArgsConstructor;
+import ml.socshared.stat.domain.response.errorstat.ErrorStatResponse;
 import ml.socshared.stat.domain.response.errorstat.ErrorsStatResponse;
 import ml.socshared.stat.domain.response.SentryIssueResponse;
 import ml.socshared.stat.domain.response.userstat.UsersStatResponse;
@@ -87,5 +88,11 @@ public class SentryController implements SentryApi {
     @GetMapping(value = "/private/stat/errors")
     public ErrorsStatResponse getErrorsStat() {
         return service.getErrorsStat();
+    }
+
+    @PreAuthorize("hasRole('SERVICE')")
+    @GetMapping(value = "/private/stat/errors/timeline")
+    public List<ErrorStatResponse> getErrorsStatTimeline() {
+        return service.getErrorStatTimeline();
     }
 }
