@@ -22,7 +22,6 @@ import java.util.List;
 @PreAuthorize("isAuthenticated()")
 public class SentryController implements SentryApi {
 
-    private final AuthService authService;
     private final SentryService sentryService;
 
     @PreAuthorize("hasRole('SERVICE')")
@@ -38,21 +37,9 @@ public class SentryController implements SentryApi {
     }
 
     @PreAuthorize("hasRole('SERVICE')")
-    @GetMapping(value = "/private/stat/users/online/count")
-    public UsersStatResponse getOnlineUsersStat() {
-        return authService.onlineUsersCount();
-    }
-
-    @PreAuthorize("hasRole('SERVICE')")
     @GetMapping(value = "/private/stat/users/online/count/timeline")
     public List<UsersStatResponse> getOnlineUsersStatTimeline() {
         return sentryService.getOnlineUsersStatTimeline();
-    }
-
-    @PreAuthorize("hasRole('SERVICE')")
-    @GetMapping(value = "/private/stat/users/active/count")
-    public UsersStatResponse getActiveUsersStat() {
-        return authService.activeUsersCount();
     }
 
     @PreAuthorize("hasRole('SERVICE')")
@@ -62,21 +49,9 @@ public class SentryController implements SentryApi {
     }
 
     @PreAuthorize("hasRole('SERVICE')")
-    @GetMapping(value = "/private/stat/users/new/count")
-    public UsersStatResponse getNewUsersStat() {
-        return authService.newUsersCount();
-    }
-
-    @PreAuthorize("hasRole('SERVICE')")
     @GetMapping(value = "/private/stat/users/new/count/timeline")
     public List<UsersStatResponse> getNewUsersStatTimeline() {
         return sentryService.getNewUsersStatTimeline();
-    }
-
-    @PreAuthorize("hasRole('SERVICE')")
-    @GetMapping(value = "/private/stat/users/all/count")
-    public UsersStatResponse getAllUsersStat() {
-        return authService.allUsersCount();
     }
 
     @PreAuthorize("hasRole('SERVICE')")

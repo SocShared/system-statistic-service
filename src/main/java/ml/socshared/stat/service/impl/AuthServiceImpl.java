@@ -1,6 +1,8 @@
 package ml.socshared.stat.service.impl;
 
 import lombok.RequiredArgsConstructor;
+import ml.socshared.stat.domain.response.RestResponsePage;
+import ml.socshared.stat.domain.response.UserResponse;
 import ml.socshared.stat.domain.response.userstat.UsersStatResponse;
 import ml.socshared.stat.client.AuthClient;
 import ml.socshared.stat.security.model.TokenObject;
@@ -41,4 +43,23 @@ public class AuthServiceImpl implements AuthService {
         return authClient.getAllUsersCount(tokenAuth());
     }
 
+    @Override
+    public RestResponsePage<UserResponse> getActiveUsers(Integer page, Integer size) {
+        return authClient.getActiveUsers(page, size, tokenAuth());
+    }
+
+    @Override
+    public RestResponsePage<UserResponse> getOnlineUsers(Integer page, Integer size) {
+        return authClient.getOnlineUsers(page, size, tokenAuth());
+    }
+
+    @Override
+    public RestResponsePage<UserResponse> getNewUsers(Integer page, Integer size) {
+        return authClient.getNewUsers(page, size, tokenAuth());
+    }
+
+    @Override
+    public RestResponsePage<UserResponse> getAllUsers(Integer page, Integer size) {
+        return authClient.getAllUsers(page, size, tokenAuth());
+    }
 }
