@@ -27,8 +27,8 @@ public class AuthController {
 
     @PreAuthorize("hasRole('SERVICE')")
     @GetMapping(value = "/private/stat/users/online")
-    public RestResponsePage<UserResponse> getOnlineUsers(@RequestParam(name = "page") Integer page,
-                                                         @RequestParam(name = "size") Integer size) {
+    public RestResponsePage<UserResponse> getOnlineUsers(@RequestParam(name = "page", defaultValue = "0") Integer page,
+                                                         @RequestParam(name = "size", defaultValue = "10") Integer size) {
         return authService.getOnlineUsers(page, size);
     }
 
@@ -40,8 +40,8 @@ public class AuthController {
 
     @PreAuthorize("hasRole('SERVICE')")
     @GetMapping(value = "/private/stat/users/active")
-    public RestResponsePage<UserResponse> getActiveUsers(@RequestParam(name = "page") Integer page,
-                                                         @RequestParam(name = "size") Integer size) {
+    public RestResponsePage<UserResponse> getActiveUsers(@RequestParam(name = "page", defaultValue = "0") Integer page,
+                                                         @RequestParam(name = "size", defaultValue = "10") Integer size) {
         return authService.getActiveUsers(page, size);
     }
 
@@ -53,8 +53,8 @@ public class AuthController {
 
     @PreAuthorize("hasRole('SERVICE')")
     @GetMapping(value = "/private/stat/users/new")
-    public RestResponsePage<UserResponse> getNewUsers(@RequestParam(name = "page") Integer page,
-                                                      @RequestParam(name = "size") Integer size) {
+    public RestResponsePage<UserResponse> getNewUsers(@RequestParam(name = "page", defaultValue = "0") Integer page,
+                                                      @RequestParam(name = "size", defaultValue = "10") Integer size) {
         return authService.getNewUsers(page, size);
     }
 
@@ -66,8 +66,8 @@ public class AuthController {
 
     @PreAuthorize("hasRole('SERVICE')")
     @GetMapping(value = "/private/stat/users/all")
-    public RestResponsePage<UserResponse> getAllUsers(@RequestParam(name = "page") Integer page,
-                                                      @RequestParam(name = "size") Integer size) {
+    public RestResponsePage<UserResponse> getAllUsers(@RequestParam(name = "page", defaultValue = "0") Integer page,
+                                                      @RequestParam(name = "size", defaultValue = "10") Integer size) {
         return authService.getAllUsers(page, size);
     }
 
