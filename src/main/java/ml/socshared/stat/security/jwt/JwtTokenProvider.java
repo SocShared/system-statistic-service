@@ -3,7 +3,7 @@ package ml.socshared.stat.security.jwt;
 import io.jsonwebtoken.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import ml.socshared.stat.security.client.AuthClient;
+import ml.socshared.stat.client.AuthClient;
 import ml.socshared.stat.security.model.ServiceDetails;
 import ml.socshared.stat.security.request.CheckTokenRequest;
 import ml.socshared.stat.security.request.ServiceTokenRequest;

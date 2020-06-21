@@ -1,4 +1,4 @@
-package ml.socshared.stat.domain.response;
+package ml.socshared.stat.domain.response.usingsocial;
 
 import lombok.Builder;
 import lombok.Data;

@@ -4,7 +4,8 @@ import lombok.RequiredArgsConstructor;
 import ml.socshared.stat.domain.response.errorstat.ErrorsStatResponse;
 import ml.socshared.stat.domain.response.SentryIssueResponse;
 import ml.socshared.stat.domain.response.userstat.UsersStatResponse;
-import ml.socshared.stat.domain.response.UsingSocialNetworkResponse;
+import ml.socshared.stat.domain.response.usingsocial.UsingSocialNetworkResponse;
+import ml.socshared.stat.service.AuthService;
 import ml.socshared.stat.service.SentryService;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,72 +22,73 @@ import java.util.List;
 @PreAuthorize("isAuthenticated()")
 public class SentryController implements SentryApi {
 
-    private final SentryService service;
+    private final AuthService authService;
+    private final SentryService sentryService;
 
     @PreAuthorize("hasRole('SERVICE')")
     @GetMapping(value = "/private/issues")
     public SentryIssueResponse[] getIssues(@RequestParam(name = "query", required = false) String query) {
-        return service.getIssues(query);
+        return sentryService.getIssues(query);
     }
 
     @PreAuthorize("hasRole('SERVICE')")
     @GetMapping(value = "/private/stat/social")
     public UsingSocialNetworkResponse getUsingSocialNetworkStat() {
-        return service.getUsingSocialNetwork();
+        return sentryService.getUsingSocialNetwork();
     }
 
     @PreAuthorize("hasRole('SERVICE')")
-    @GetMapping(value = "/private/stat/users/online")
+    @GetMapping(value = "/private/stat/users/online/count")
     public UsersStatResponse getOnlineUsersStat() {
-        return service.getOnlineUsersStat();
+        return authService.onlineUsersCount();
     }
 
     @PreAuthorize("hasRole('SERVICE')")
-    @GetMapping(value = "/private/stat/users/online/timeline")
+    @GetMapping(value = "/private/stat/users/online/count/timeline")
     public List<UsersStatResponse> getOnlineUsersStatTimeline() {
-        return service.getOnlineUsersStatTimeline();
+        return sentryService.getOnlineUsersStatTimeline();
     }
 
     @PreAuthorize("hasRole('SERVICE')")
-    @GetMapping(value = "/private/stat/users/active")
+    @GetMapping(value = "/private/stat/users/active/count")
     public UsersStatResponse getActiveUsersStat() {
-        return service.getActiveUsersStat();
+        return authService.activeUsersCount();
     }
 
     @PreAuthorize("hasRole('SERVICE')")
-    @GetMapping(value = "/private/stat/users/active/timeline")
+    @GetMapping(value = "/private/stat/users/active/count/timeline")
     public List<UsersStatResponse> getActiveUsersStatTimeline() {
-        return service.getActiveUsersStatTimeline();
+        return sentryService.getActiveUsersStatTimeline();
     }
 
     @PreAuthorize("hasRole('SERVICE')")
-    @GetMapping(value = "/private/stat/users/new")
+    @GetMapping(value = "/private/stat/users/new/count")
     public UsersStatResponse getNewUsersStat() {
-        return service.getNewUsersStat();
+        return authService.newUsersCount();
     }
 
     @PreAuthorize("hasRole('SERVICE')")
-    @GetMapping(value = "/private/stat/users/new/timeline")
+    @GetMapping(value = "/private/stat/users/new/count/timeline")
     public List<UsersStatResponse> getNewUsersStatTimeline() {
-        return service.getNewUsersStatTimeline();
+        return sentryService.getNewUsersStatTimeline();
     }
 
     @PreAuthorize("hasRole('SERVICE')")
-    @GetMapping(value = "/private/stat/users/all")
+    @GetMapping(value = "/private/stat/users/all/count")
     public UsersStatResponse getAllUsersStat() {
-        return service.getAllUsersStat();
+        return authService.allUsersCount();
     }
 
     @PreAuthorize("hasRole('SERVICE')")
-    @GetMapping(value = "/private/stat/users/all/timeline")
+    @GetMapping(value = "/private/stat/users/all/count/timeline")
     public List<UsersStatResponse> getAllUsersStatTimeline() {
-        return service.getAllUsersStatTimeline();
+        return sentryService.getAllUsersStatTimeline();
     }
 
     @PreAuthorize("hasRole('SERVICE')")
     @GetMapping(value = "/private/stat/errors")
     public ErrorsStatResponse getErrorsStat() {
-        return service.getErrorsStat();
+        return sentryService.getErrorsStat();
     }
 
 }
