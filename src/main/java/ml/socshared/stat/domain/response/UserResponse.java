@@ -16,10 +16,13 @@ public class UserResponse {
     private UUID userId;
     private String username;
     private String email;
+    private Boolean emailVerified;
     private String firstname;
     private String lastname;
     @JsonSerialize(using = CustomLocalDateTimeSerializer.class)
     private LocalDateTime timeOnline;
+    private Boolean accountNonLocked;
+    private Boolean resetPassword;
     private Set<RoleResponse> roles;
 
 }
