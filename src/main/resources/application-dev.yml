@@ -14,6 +14,9 @@ sentry:
 feign:
   url:
     auth: ${AUTH_SERVICE:http://auth-service:9999/}
+    fb: ${FB_SERVICE:http://fb-adapter:8081}
+    vk: ${VK_SERVICE:http://vk-adapter:8082}
+    storage: ${STORAGE_SERVICE:http://storage-service:8686}
 
 management:
   endpoints:

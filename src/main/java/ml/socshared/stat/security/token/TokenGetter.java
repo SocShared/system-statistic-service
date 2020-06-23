@@ -25,6 +25,9 @@ public class TokenGetter {
     }
 
     private TokenObject tokenAuth;
+    private TokenObject tokenStorageService;
+    private TokenObject tokenFB;
+    private TokenObject tokenVK;
 
     private void init() {
         tokenAuth = new TokenObject();
@@ -44,6 +47,55 @@ public class TokenGetter {
         this.tokenAuth.setToken(jwtTokenProvider.buildServiceToken(request).getToken());
         log.debug(tokenAuth.getToken());
         return tokenAuth;
+    }
+
+    @Before("execution(* ml.socshared.stat.service.impl.SocServiceImpl.*(..))")
+    public TokenObject initTokenStorageService() {
+        if (tokenStorageService != null && jwtTokenProvider.validateServiceToken(tokenStorageService.getToken())) {
+            return tokenStorageService;
+        }
+
+        ServiceTokenRequest request = new ServiceTokenRequest();
+        request.setFromServiceId(UUID.fromString("eeb4585c-1d8f-463c-b441-e5dbb27ec94d"));
+        request.setToServiceId(UUID.fromString("64141ce5-5604-4ade-ada2-e38cf7d2522c"));
+        request.setToSecretService(UUID.fromString("5b21977e-166f-471b-a7a7-c60b20e18cf9"));
+
+        this.tokenStorageService.setToken(jwtTokenProvider.buildServiceToken(request).getToken());
+
+        return tokenStorageService;
+    }
+
+    @Before("execution(* ml.socshared.stat.service.impl.SocServiceImpl.*(..))")
+    public TokenObject initTokenFB() {
+        if (tokenFB.getToken() != null && jwtTokenProvider.validateServiceToken(tokenFB.getToken())) {
+            log.debug(tokenFB.getToken());
+            return tokenFB;
+        }
+
+        ServiceTokenRequest request = new ServiceTokenRequest();
+        request.setFromServiceId(UUID.fromString("eeb4585c-1d8f-463c-b441-e5dbb27ec94d"));
+        request.setToServiceId(UUID.fromString("f7e14d85-415c-4ab9-b285-a6481d79f507"));
+        request.setToSecretService(UUID.fromString("427d82bb-b367-40b4-bee8-b18e32480899"));
+
+        this.tokenFB.setToken(jwtTokenProvider.buildServiceToken(request).getToken());
+        log.debug(tokenFB.getToken());
+        return tokenFB;
+    }
+
+    @Before("execution(* ml.socshared.stat.service.impl.SocServiceImpl.*(..))")
+    public TokenObject initTokenVK() {
+        if (tokenVK != null && jwtTokenProvider.validateServiceToken(tokenVK.getToken())) {
+            return tokenVK;
+        }
+
+        ServiceTokenRequest request = new ServiceTokenRequest();
+        request.setFromServiceId(UUID.fromString("eeb4585c-1d8f-463c-b441-e5dbb27ec94d"));
+        request.setToServiceId(UUID.fromString("cb43eee3-3468-4cc2-b6ed-63419e8726ce"));
+        request.setToSecretService(UUID.fromString("f769cb1c-bf08-478d-8218-0bb347369dd7"));
+
+        this.tokenVK.setToken(jwtTokenProvider.buildServiceToken(request).getToken());
+
+        return tokenVK;
     }
 
 }

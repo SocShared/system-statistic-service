@@ -10,3 +10,10 @@ sentry:
   api:
     key: ${SENTRY_API_KEY:8a102d3eae46498f9e1c5db42298308bbf50051724ae4cac9ee86b13ea9dfbbd}
   url: ${SENTRY_URL:https://sentry.socshared.ml}
+
+feign:
+  url:
+    auth: ${AUTH_SERVICE:http://auth-service:9999/}
+    fb: ${FB_SERVICE:http://fb-adapter:8081}
+    vk: ${VK_SERVICE:http://vk-adapter:8082}
+    storage: ${STORAGE_SERVICE:http://storage-service:8686}
