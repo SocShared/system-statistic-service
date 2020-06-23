@@ -31,6 +31,9 @@ public class TokenGetter {
 
     private void init() {
         tokenAuth = new TokenObject();
+        tokenStorageService = new TokenObject();
+        tokenFB = new TokenObject();
+        tokenVK = new TokenObject();
     }
 
     @Before("execution(* ml.socshared.stat.service.impl.AuthServiceImpl.*(..))")
