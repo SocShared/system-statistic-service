@@ -20,6 +20,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.*;
 
 @Service
@@ -57,12 +58,11 @@ public class SentryServiceImpl implements SentryService {
         SentryIssueResponse[] issueResponse = client.getIssues("level:info server_name:" + SentryServerName.AUTH.value() +
                 " type:" + SentryAuthTags.ONLINE_USERS.value(), token());
 
+        List<UsersStatResponse> lists = new LinkedList<>();
         if (issueResponse.length == 1) {
             SentryEventResponse[] events = client.getEvents(issueResponse[0].getId(),
                     "level:info server_name:" + SentryServerName.AUTH.value() + " type:" + SentryAuthTags.ONLINE_USERS.value(),
                     token());
-
-            List<UsersStatResponse> lists = new LinkedList<>();
 
             for (SentryEventResponse event : events) {
 
@@ -74,12 +74,29 @@ public class SentryServiceImpl implements SentryService {
                         .build();
 
                 lists.add(response);
+                if (lists.size() == 30)
+                    break;
             }
 
-            return lists;
+        }
+        UsersStatResponse usersStatResponse;
+        if (lists.size() != 0) {
+            usersStatResponse = lists.get(lists.size() - 1);
+        } else {
+            usersStatResponse = UsersStatResponse.builder()
+                    .onlineUsers(0L)
+                    .dateTime(LocalDateTime.now())
+                    .build();
+        }
+        lists.add(usersStatResponse);
+        while (lists.size() < 30) {
+            lists.add(UsersStatResponse.builder()
+                    .onlineUsers(0L)
+                    .dateTime(usersStatResponse.getDateTime().minusDays(1))
+                    .build());
         }
 
-        throw new HttpBadGatewayException("invalid online users stat");
+        return lists;
     }
 
     @Override
@@ -87,12 +104,11 @@ public class SentryServiceImpl implements SentryService {
         SentryIssueResponse[] issueResponse = client.getIssues("level:info server_name:" + SentryServerName.AUTH.value() +
                 " type:" + SentryAuthTags.ACTIVE_USERS.value(), token());
 
+        List<UsersStatResponse> lists = new LinkedList<>();
         if (issueResponse.length == 1) {
             SentryEventResponse[] events = client.getEvents(issueResponse[0].getId(),
                     "level:info server_name:" + SentryServerName.AUTH.value() + " type:" + SentryAuthTags.ACTIVE_USERS.value(),
                     token());
-
-            List<UsersStatResponse> lists = new LinkedList<>();
 
             for (SentryEventResponse event : events) {
 
@@ -104,12 +120,30 @@ public class SentryServiceImpl implements SentryService {
                         .build();
 
                 lists.add(response);
+                if (lists.size() == 30)
+                    break;
             }
 
-            return lists;
         }
 
-        throw new HttpBadGatewayException("invalid active users stat");
+        UsersStatResponse usersStatResponse;
+        if (lists.size() != 0) {
+            usersStatResponse = lists.get(lists.size() - 1);
+        } else {
+            usersStatResponse = UsersStatResponse.builder()
+                    .activeUsers(0L)
+                    .dateTime(LocalDateTime.now())
+                    .build();
+        }
+        lists.add(usersStatResponse);
+        while (lists.size() < 30) {
+            lists.add(UsersStatResponse.builder()
+                    .activeUsers(0L)
+                    .dateTime(usersStatResponse.getDateTime().minusDays(1))
+                    .build());
+        }
+
+        return lists;
     }
 
     @Override
@@ -117,12 +151,11 @@ public class SentryServiceImpl implements SentryService {
         SentryIssueResponse[] issueResponse = client.getIssues("level:info server_name:" + SentryServerName.AUTH.value() +
                 " type:" + SentryAuthTags.NEW_USERS.value(), token());
 
+        List<UsersStatResponse> lists = new LinkedList<>();
         if (issueResponse.length == 1) {
             SentryEventResponse[] events = client.getEvents(issueResponse[0].getId(),
                     "level:info server_name:" + SentryServerName.AUTH.value() + " type:" + SentryAuthTags.NEW_USERS.value(),
                     token());
-
-            List<UsersStatResponse> lists = new LinkedList<>();
 
             for (SentryEventResponse event : events) {
 
@@ -134,12 +167,30 @@ public class SentryServiceImpl implements SentryService {
                         .build();
 
                 lists.add(response);
+                if (lists.size() == 30)
+                    break;
             }
 
-            return lists;
         }
 
-        throw new HttpBadGatewayException("invalid new users stat");
+        UsersStatResponse usersStatResponse;
+        if (lists.size() != 0) {
+            usersStatResponse = lists.get(lists.size() - 1);
+        } else {
+            usersStatResponse = UsersStatResponse.builder()
+                    .newUsers(0L)
+                    .dateTime(LocalDateTime.now())
+                    .build();
+        }
+        lists.add(usersStatResponse);
+        while (lists.size() < 30) {
+            lists.add(UsersStatResponse.builder()
+                    .newUsers(0L)
+                    .dateTime(usersStatResponse.getDateTime().minusDays(1))
+                    .build());
+        }
+
+        return lists;
     }
 
     @Override
@@ -147,12 +198,11 @@ public class SentryServiceImpl implements SentryService {
         SentryIssueResponse[] issueResponse = client.getIssues("level:info server_name:" + SentryServerName.AUTH.value() +
                 " type:" + SentryAuthTags.ALL_USERS.value(), token());
 
+        List<UsersStatResponse> lists = new LinkedList<>();
         if (issueResponse.length == 1) {
             SentryEventResponse[] events = client.getEvents(issueResponse[0].getId(),
                     "level:info server_name:" + SentryServerName.AUTH.value() + " type:" + SentryAuthTags.ALL_USERS.value(),
                     token());
-
-            List<UsersStatResponse> lists = new LinkedList<>();
 
             for (SentryEventResponse event : events) {
 
@@ -164,12 +214,30 @@ public class SentryServiceImpl implements SentryService {
                         .build();
 
                 lists.add(response);
+                if (lists.size() == 30)
+                    break;
             }
 
-            return lists;
         }
 
-        throw new HttpBadGatewayException("invalid all users stat");
+        UsersStatResponse usersStatResponse;
+        if (lists.size() != 0) {
+            usersStatResponse = lists.get(lists.size() - 1);
+        } else {
+            usersStatResponse = UsersStatResponse.builder()
+                    .allUsers(0L)
+                    .dateTime(LocalDateTime.now())
+                    .build();
+        }
+        lists.add(usersStatResponse);
+        while (lists.size() < 30) {
+            lists.add(UsersStatResponse.builder()
+                    .allUsers(0L)
+                    .dateTime(usersStatResponse.getDateTime().minusDays(1))
+                    .build());
+        }
+
+        return lists;
     }
 
     private long countErrors(SentryIssueResponse[] errors) {
