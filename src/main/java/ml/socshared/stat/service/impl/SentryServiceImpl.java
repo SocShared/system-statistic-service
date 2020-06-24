@@ -195,73 +195,73 @@ public class SentryServiceImpl implements SentryService {
         VkEventsResponse vkEventsResponse = new VkEventsResponse();
 
         long allEventsCount = 0;
-        SentryIssueResponse[] vkUserInfo = client.getIssues("server_name:" + SentryServerName.VK_ADAPTER.value() + " type:" + SentryVkTags.GET_USER_INFO.value(), token());
+        SentryIssueResponse[] vkUserInfo = client.getIssues("level:info server_name:" + SentryServerName.VK_ADAPTER.value() + " type:" + SentryVkTags.GET_USER_INFO.value(), token());
         if (vkUserInfo.length == 1) {
             vkEventsResponse.setUserInfoEventsCount(Long.parseLong(vkUserInfo[0].getCount()));
             allEventsCount += vkEventsResponse.getUserInfoEventsCount();
         }
 
-        SentryIssueResponse[] vkCommentsOfPost = client.getIssues("server_name:" + SentryServerName.VK_ADAPTER.value() + " type:" + SentryVkTags.COMMENTS_OF_POST.value(), token());
+        SentryIssueResponse[] vkCommentsOfPost = client.getIssues("level:info server_name:" + SentryServerName.VK_ADAPTER.value() + " type:" + SentryVkTags.COMMENTS_OF_POST.value(), token());
         if (vkCommentsOfPost.length == 1) {
             vkEventsResponse.setCommentsOfPostEventsCount(Long.parseLong(vkCommentsOfPost[0].getCount()));
             allEventsCount += vkEventsResponse.getCommentOfPostEventsCount();
         }
 
-        SentryIssueResponse[] vkCommentOfPost = client.getIssues("server_name:" + SentryServerName.VK_ADAPTER.value() + " type:" + SentryVkTags.COMMENT_OF_POST.value(), token());
+        SentryIssueResponse[] vkCommentOfPost = client.getIssues("level:info server_name:" + SentryServerName.VK_ADAPTER.value() + " type:" + SentryVkTags.COMMENT_OF_POST.value(), token());
         if (vkCommentOfPost.length == 1) {
             vkEventsResponse.setCommentOfPostEventsCount(Long.parseLong(vkCommentOfPost[0].getCount()));
             allEventsCount += vkEventsResponse.getCommentOfPostEventsCount();
         }
 
-        SentryIssueResponse[] vkSubComments = client.getIssues("server_name:" + SentryServerName.VK_ADAPTER.value() + " type:" + SentryVkTags.GET_SUB_COMMENTS.value(), token());
+        SentryIssueResponse[] vkSubComments = client.getIssues("level:info server_name:" + SentryServerName.VK_ADAPTER.value() + " type:" + SentryVkTags.GET_SUB_COMMENTS.value(), token());
         if (vkSubComments.length == 1) {
             vkEventsResponse.setSubCommentsEventsCount(Long.parseLong(vkSubComments[0].getCount()));
             allEventsCount += vkEventsResponse.getSubCommentsEventsCount();
         }
 
-        SentryIssueResponse[] vkSumCommentById = client.getIssues("server_name:" + SentryServerName.VK_ADAPTER.value() + " type:" + SentryVkTags.GET_SUB_COMMENT_BY_ID.value(), token());
+        SentryIssueResponse[] vkSumCommentById = client.getIssues("level:info server_name:" + SentryServerName.VK_ADAPTER.value() + " type:" + SentryVkTags.GET_SUB_COMMENT_BY_ID.value(), token());
         if (vkSumCommentById.length == 1) {
             vkEventsResponse.setSubCommentByIdEventsCount(Long.parseLong(vkSumCommentById[0].getCount()));
             allEventsCount += vkEventsResponse.getSubCommentByIdEventsCount();
         }
 
-        SentryIssueResponse[] vkUserGroups = client.getIssues("server_name:" + SentryServerName.VK_ADAPTER.value() + " type:" + SentryVkTags.GET_USER_GROUPS.value(), token());
+        SentryIssueResponse[] vkUserGroups = client.getIssues("level:info server_name:" + SentryServerName.VK_ADAPTER.value() + " type:" + SentryVkTags.GET_USER_GROUPS.value(), token());
         if (vkUserGroups.length == 1) {
             vkEventsResponse.setUserGroupsEventsCount(Long.parseLong(vkUserGroups[0].getCount()));
             allEventsCount += vkEventsResponse.getUserGroupsEventsCount();
         }
 
-        SentryIssueResponse[] vkUserGroup = client.getIssues("server_name:" + SentryServerName.VK_ADAPTER.value() + " type:" + SentryVkTags.GET_USER_GROUP.value(), token());
+        SentryIssueResponse[] vkUserGroup = client.getIssues("level:info server_name:" + SentryServerName.VK_ADAPTER.value() + " type:" + SentryVkTags.GET_USER_GROUP.value(), token());
         if (vkUserGroup.length == 1) {
             vkEventsResponse.setUserGroupEventsCount(Long.parseLong(vkUserGroup[0].getCount()));
             allEventsCount += vkEventsResponse.getUserGroupEventsCount();
         }
 
-        SentryIssueResponse[] vkPosts = client.getIssues("server_name:" + SentryServerName.VK_ADAPTER.value() + " type:" + SentryVkTags.GET_POSTS.value(), token());
+        SentryIssueResponse[] vkPosts = client.getIssues("level:info server_name:" + SentryServerName.VK_ADAPTER.value() + " type:" + SentryVkTags.GET_POSTS.value(), token());
         if (vkPosts.length == 1) {
             vkEventsResponse.setPostsEventsCount(Long.parseLong(vkPosts[0].getCount()));
             allEventsCount += vkEventsResponse.getPostsEventsCount();
         }
 
-        SentryIssueResponse[] vkPost = client.getIssues("server_name:" + SentryServerName.VK_ADAPTER.value() + " type:" + SentryVkTags.GET_POST.value(), token());
+        SentryIssueResponse[] vkPost = client.getIssues("level:info server_name:" + SentryServerName.VK_ADAPTER.value() + " type:" + SentryVkTags.GET_POST.value(), token());
         if (vkPost.length == 1) {
             vkEventsResponse.setPostByIdEventsCount(Long.parseLong(vkPost[0].getCount()));
             allEventsCount += vkEventsResponse.getPostByIdEventsCount();
         }
 
-        SentryIssueResponse[] vkAddPost = client.getIssues("server_name:" + SentryServerName.VK_ADAPTER.value() + " type:" + SentryVkTags.ADD_POST.value(), token());
+        SentryIssueResponse[] vkAddPost = client.getIssues("level:info server_name:" + SentryServerName.VK_ADAPTER.value() + " type:" + SentryVkTags.ADD_POST.value(), token());
         if (vkAddPost.length == 1) {
             vkEventsResponse.setAddPostEventsCount(Long.parseLong(vkAddPost[0].getCount()));
             allEventsCount += vkEventsResponse.getAddPostEventsCount();
         }
 
-        SentryIssueResponse[] vkUpdatePost = client.getIssues("server_name:" + SentryServerName.VK_ADAPTER.value() + " type:" + SentryVkTags.UPDATE_POST.value(), token());
+        SentryIssueResponse[] vkUpdatePost = client.getIssues("level:info server_name:" + SentryServerName.VK_ADAPTER.value() + " type:" + SentryVkTags.UPDATE_POST.value(), token());
         if (vkUpdatePost.length == 1) {
             vkEventsResponse.setUpdatePostEventsCount(Long.parseLong(vkUpdatePost[0].getCount()));
             allEventsCount += vkEventsResponse.getUpdatePostEventsCount();
         }
 
-        SentryIssueResponse[] vkDeletePost = client.getIssues("server_name:" + SentryServerName.VK_ADAPTER.value() + " type:" + SentryVkTags.DELETE_POST.value(), token());
+        SentryIssueResponse[] vkDeletePost = client.getIssues("level:info server_name:" + SentryServerName.VK_ADAPTER.value() + " type:" + SentryVkTags.DELETE_POST.value(), token());
         if (vkDeletePost.length == 1) {
             vkEventsResponse.setDeletePostEventsCount(Long.parseLong(vkDeletePost[0].getCount()));
             allEventsCount += vkEventsResponse.getDeletePostEventsCount();
@@ -275,114 +275,114 @@ public class SentryServiceImpl implements SentryService {
     private FacebookEventsResponse findFacebookEvents() {
         FacebookEventsResponse facebookEventsResponse = new FacebookEventsResponse();
 
-        SentryIssueResponse[] fbAllFacebookAccount = client.getIssues("server_name:" + SentryServerName.FB_ADAPTER.value() + " type:" + SentryFacebookTags.GET_ALL_FACEBOOK_ACCOUNT.value(), token());
-        log.info("query: server_name:" + SentryServerName.FB_ADAPTER.value() + " type:" + SentryFacebookTags.GET_ALL_FACEBOOK_ACCOUNT.value());
+        SentryIssueResponse[] fbAllFacebookAccount = client.getIssues("level:info server_name:" + SentryServerName.FB_ADAPTER.value() + " type:" + SentryFacebookTags.GET_ALL_FACEBOOK_ACCOUNT.value(), token());
+        log.info("query: level:info server_name:" + SentryServerName.FB_ADAPTER.value() + " type:" + SentryFacebookTags.GET_ALL_FACEBOOK_ACCOUNT.value());
         long allEventsCount = 0;
         if (fbAllFacebookAccount.length == 1) {
             facebookEventsResponse.setAllFacebookAccountEventsCount(Long.parseLong(fbAllFacebookAccount[0].getCount()));
             allEventsCount += facebookEventsResponse.getAllFacebookAccountEventsCount();
         }
 
-        SentryIssueResponse[] fbSaveAccount = client.getIssues("server_name:" + SentryServerName.FB_ADAPTER.value() + " type:" + SentryFacebookTags.SAVE_ACCOUNT.value(), token());
-        log.info("query: server_name:" + SentryServerName.FB_ADAPTER.value() + " type:" + SentryFacebookTags.SAVE_ACCOUNT.value());
+        SentryIssueResponse[] fbSaveAccount = client.getIssues("level:info server_name:" + SentryServerName.FB_ADAPTER.value() + " type:" + SentryFacebookTags.SAVE_ACCOUNT.value(), token());
+        log.info("query: level:info server_name:" + SentryServerName.FB_ADAPTER.value() + " type:" + SentryFacebookTags.SAVE_ACCOUNT.value());
         if (fbSaveAccount.length == 1) {
             facebookEventsResponse.setSaveAccountEventsCount(Long.parseLong(fbSaveAccount[0].getCount()));
             allEventsCount += facebookEventsResponse.getSaveAccountEventsCount();
         }
 
-        SentryIssueResponse[] fbRemoveAccount = client.getIssues("server_name:" + SentryServerName.FB_ADAPTER.value() + " type:" + SentryFacebookTags.REMOVE_ACCOUNT.value(), token());
-        log.info("query: server_name:" + SentryServerName.FB_ADAPTER.value() + " type:" + SentryFacebookTags.REMOVE_ACCOUNT.value());
+        SentryIssueResponse[] fbRemoveAccount = client.getIssues("level:info server_name:" + SentryServerName.FB_ADAPTER.value() + " type:" + SentryFacebookTags.REMOVE_ACCOUNT.value(), token());
+        log.info("query: level:info server_name:" + SentryServerName.FB_ADAPTER.value() + " type:" + SentryFacebookTags.REMOVE_ACCOUNT.value());
         if (fbRemoveAccount.length == 1) {
             facebookEventsResponse.setRemoveAccountEventsCount(Long.parseLong(fbRemoveAccount[0].getCount()));
             allEventsCount += facebookEventsResponse.getRemoveAccountEventsCount();
         }
 
-        SentryIssueResponse[] fbUrlForming = client.getIssues("server_name:" + SentryServerName.FB_ADAPTER.value() + " type:" + SentryFacebookTags.URL_FORMING.value(), token());
-        log.info("query: server_name:" + SentryServerName.FB_ADAPTER.value() + " type:" + SentryFacebookTags.URL_FORMING.value());
+        SentryIssueResponse[] fbUrlForming = client.getIssues("level:info server_name:" + SentryServerName.FB_ADAPTER.value() + " type:" + SentryFacebookTags.URL_FORMING.value(), token());
+        log.info("query: level:info server_name:" + SentryServerName.FB_ADAPTER.value() + " type:" + SentryFacebookTags.URL_FORMING.value());
         if (fbUrlForming.length == 1) {
             facebookEventsResponse.setUrlFormingEventsCount(Long.parseLong(fbUrlForming[0].getCount()));
             allEventsCount += facebookEventsResponse.getUrlFormingEventsCount();
         }
 
-        SentryIssueResponse[] fbUserInfo = client.getIssues("server_name:" + SentryServerName.FB_ADAPTER.value() + " type:" + SentryFacebookTags.GET_USER_INFO.value(), token());
-        log.info("query: server_name:" + SentryServerName.FB_ADAPTER.value() + " type:" + SentryFacebookTags.GET_USER_INFO.value());
+        SentryIssueResponse[] fbUserInfo = client.getIssues("level:info server_name:" + SentryServerName.FB_ADAPTER.value() + " type:" + SentryFacebookTags.GET_USER_INFO.value(), token());
+        log.info("query: level:info server_name:" + SentryServerName.FB_ADAPTER.value() + " type:" + SentryFacebookTags.GET_USER_INFO.value());
         if (fbUserInfo.length == 1) {
             facebookEventsResponse.setUserInfoEventsCount(Long.parseLong(fbUserInfo[0].getCount()));
             allEventsCount += facebookEventsResponse.getUserInfoEventsCount();
         }
 
-        SentryIssueResponse[] fbCommentsOfPost = client.getIssues("server_name:" + SentryServerName.FB_ADAPTER.value() + " type:" + SentryFacebookTags.COMMENTS_OF_POST.value(), token());
-        log.info("query: server_name:" + SentryServerName.FB_ADAPTER.value() + " type:" + SentryFacebookTags.COMMENTS_OF_POST.value());
+        SentryIssueResponse[] fbCommentsOfPost = client.getIssues("level:info server_name:" + SentryServerName.FB_ADAPTER.value() + " type:" + SentryFacebookTags.COMMENTS_OF_POST.value(), token());
+        log.info("query: level:info server_name:" + SentryServerName.FB_ADAPTER.value() + " type:" + SentryFacebookTags.COMMENTS_OF_POST.value());
         if (fbCommentsOfPost.length == 1) {
             facebookEventsResponse.setCommentsOfPostEventsCount(Long.parseLong(fbCommentsOfPost[0].getCount()));
             allEventsCount += facebookEventsResponse.getCommentsOfPostEventsCount();
         }
 
-        SentryIssueResponse[] fbCommentOfPost = client.getIssues("server_name:" + SentryServerName.FB_ADAPTER.value() + " type:" + SentryFacebookTags.COMMENT_OF_POST.value(), token());
-        log.info("query: server_name:" + SentryServerName.FB_ADAPTER.value() + " type:" + SentryFacebookTags.COMMENT_OF_POST.value());
+        SentryIssueResponse[] fbCommentOfPost = client.getIssues("level:info server_name:" + SentryServerName.FB_ADAPTER.value() + " type:" + SentryFacebookTags.COMMENT_OF_POST.value(), token());
+        log.info("query: level:info server_name:" + SentryServerName.FB_ADAPTER.value() + " type:" + SentryFacebookTags.COMMENT_OF_POST.value());
         if (fbCommentOfPost.length == 1) {
             facebookEventsResponse.setCommentOfPostEventsCount(Long.parseLong(fbCommentOfPost[0].getCount()));
             allEventsCount += facebookEventsResponse.getCommentOfPostEventsCount();
         }
 
-        SentryIssueResponse[] fbSubComments = client.getIssues("server_name:" + SentryServerName.FB_ADAPTER.value() + " type:" + SentryFacebookTags.GET_SUB_COMMENTS.value(), token());
-        log.info("query: server_name:" + SentryServerName.FB_ADAPTER.value() + " type:" + SentryFacebookTags.GET_SUB_COMMENTS.value());
+        SentryIssueResponse[] fbSubComments = client.getIssues("level:info server_name:" + SentryServerName.FB_ADAPTER.value() + " type:" + SentryFacebookTags.GET_SUB_COMMENTS.value(), token());
+        log.info("query: level:info server_name:" + SentryServerName.FB_ADAPTER.value() + " type:" + SentryFacebookTags.GET_SUB_COMMENTS.value());
         if (fbSubComments.length == 1) {
             facebookEventsResponse.setSubCommentsEventsCount(Long.parseLong(fbSubComments[0].getCount()));
             allEventsCount += facebookEventsResponse.getSubCommentsEventsCount();
         }
 
-        SentryIssueResponse[] fbSumCommentById = client.getIssues("server_name:" + SentryServerName.FB_ADAPTER.value() + " type:" + SentryFacebookTags.GET_SUB_COMMENT_BY_ID.value(), token());
-        log.info("query: server_name:" + SentryServerName.FB_ADAPTER.value() + " type:" + SentryFacebookTags.GET_SUB_COMMENT_BY_ID.value());
+        SentryIssueResponse[] fbSumCommentById = client.getIssues("level:info server_name:" + SentryServerName.FB_ADAPTER.value() + " type:" + SentryFacebookTags.GET_SUB_COMMENT_BY_ID.value(), token());
+        log.info("query: level:info server_name:" + SentryServerName.FB_ADAPTER.value() + " type:" + SentryFacebookTags.GET_SUB_COMMENT_BY_ID.value());
         if (fbSumCommentById.length == 1) {
             facebookEventsResponse.setSubCommentByIdEventsCount(Long.parseLong(fbSumCommentById[0].getCount()));
             allEventsCount += facebookEventsResponse.getSubCommentByIdEventsCount();
         }
 
-        SentryIssueResponse[] fbUserGroups = client.getIssues("server_name:" + SentryServerName.FB_ADAPTER.value() + " type:" + SentryFacebookTags.GET_USER_GROUPS.value(), token());
-        log.info("query: server_name:" + SentryServerName.FB_ADAPTER.value() + " type:" + SentryFacebookTags.GET_USER_GROUPS.value());
+        SentryIssueResponse[] fbUserGroups = client.getIssues("level:info server_name:" + SentryServerName.FB_ADAPTER.value() + " type:" + SentryFacebookTags.GET_USER_GROUPS.value(), token());
+        log.info("query: level:info server_name:" + SentryServerName.FB_ADAPTER.value() + " type:" + SentryFacebookTags.GET_USER_GROUPS.value());
         if (fbUserGroups.length == 1) {
             facebookEventsResponse.setUserGroupsEventsCount(Long.parseLong(fbUserGroups[0].getCount()));
             allEventsCount += facebookEventsResponse.getUserGroupsEventsCount();
         }
 
-        SentryIssueResponse[] fbUserGroup = client.getIssues("server_name:" + SentryServerName.FB_ADAPTER.value() + " type:" + SentryFacebookTags.GET_USER_GROUP.value(), token());
-        log.info("query: server_name:" + SentryServerName.FB_ADAPTER.value() + " type:" + SentryFacebookTags.GET_USER_GROUP.value());
+        SentryIssueResponse[] fbUserGroup = client.getIssues("level:info server_name:" + SentryServerName.FB_ADAPTER.value() + " type:" + SentryFacebookTags.GET_USER_GROUP.value(), token());
+        log.info("query: level:info server_name:" + SentryServerName.FB_ADAPTER.value() + " type:" + SentryFacebookTags.GET_USER_GROUP.value());
         if (fbUserGroup.length == 1) {
             facebookEventsResponse.setUserGroupEventsCount(Long.parseLong(fbUserGroup[0].getCount()));
             allEventsCount += facebookEventsResponse.getUserGroupEventsCount();
         }
 
-        SentryIssueResponse[] fbPosts = client.getIssues("server_name:" + SentryServerName.FB_ADAPTER.value() + " type:" + SentryFacebookTags.GET_POSTS.value(), token());
-        log.info("query: server_name:" + SentryServerName.FB_ADAPTER.value() + " type:" + SentryFacebookTags.GET_POSTS.value());
+        SentryIssueResponse[] fbPosts = client.getIssues("level:info server_name:" + SentryServerName.FB_ADAPTER.value() + " type:" + SentryFacebookTags.GET_POSTS.value(), token());
+        log.info("query: level:info server_name:" + SentryServerName.FB_ADAPTER.value() + " type:" + SentryFacebookTags.GET_POSTS.value());
         if (fbPosts.length == 1) {
             facebookEventsResponse.setPostsEventsCount(Long.parseLong(fbPosts[0].getCount()));
             allEventsCount += facebookEventsResponse.getPostsEventsCount();
         }
 
-        SentryIssueResponse[] fbPost = client.getIssues("server_name:" + SentryServerName.FB_ADAPTER.value() + " type:" + SentryFacebookTags.GET_POST.value(), token());
-        log.info("query: server_name:" + SentryServerName.FB_ADAPTER.value() + " type:" + SentryFacebookTags.GET_POST.value());
+        SentryIssueResponse[] fbPost = client.getIssues("level:info server_name:" + SentryServerName.FB_ADAPTER.value() + " type:" + SentryFacebookTags.GET_POST.value(), token());
+        log.info("query: level:info server_name:" + SentryServerName.FB_ADAPTER.value() + " type:" + SentryFacebookTags.GET_POST.value());
         if (fbPost.length == 1) {
             facebookEventsResponse.setPostByIdEventsCount(Long.parseLong(fbPost[0].getCount()));
             allEventsCount += facebookEventsResponse.getPostByIdEventsCount();
         }
 
-        SentryIssueResponse[] fbAddPost = client.getIssues("server_name:" + SentryServerName.FB_ADAPTER.value() + " type:" + SentryFacebookTags.ADD_POST.value(), token());
-        log.info("query: server_name:" + SentryServerName.FB_ADAPTER.value() + " type:" + SentryFacebookTags.ADD_POST.value());
+        SentryIssueResponse[] fbAddPost = client.getIssues("level:info server_name:" + SentryServerName.FB_ADAPTER.value() + " type:" + SentryFacebookTags.ADD_POST.value(), token());
+        log.info("query: level:info server_name:" + SentryServerName.FB_ADAPTER.value() + " type:" + SentryFacebookTags.ADD_POST.value());
         if (fbAddPost.length == 1) {
             facebookEventsResponse.setAddPostEventsCount(Long.parseLong(fbAddPost[0].getCount()));
             allEventsCount += facebookEventsResponse.getAddPostEventsCount();
         }
 
-        SentryIssueResponse[] fbUpdatePost = client.getIssues("server_name:" + SentryServerName.FB_ADAPTER.value() + " type:" + SentryFacebookTags.UPDATE_POST.value(), token());
-        log.info("query: server_name:" + SentryServerName.FB_ADAPTER.value() + " type:" + SentryFacebookTags.UPDATE_POST.value());
+        SentryIssueResponse[] fbUpdatePost = client.getIssues("level:info server_name:" + SentryServerName.FB_ADAPTER.value() + " type:" + SentryFacebookTags.UPDATE_POST.value(), token());
+        log.info("query: level:info server_name:" + SentryServerName.FB_ADAPTER.value() + " type:" + SentryFacebookTags.UPDATE_POST.value());
         if (fbUpdatePost.length == 1) {
             facebookEventsResponse.setUpdatePostEventsCount(Long.parseLong(fbUpdatePost[0].getCount()));
             allEventsCount += facebookEventsResponse.getUpdatePostEventsCount();
         }
 
-        SentryIssueResponse[] fbDeletePost = client.getIssues("server_name:" + SentryServerName.FB_ADAPTER.value() + " type:" + SentryFacebookTags.DELETE_POST.value(), token());
-        log.info("query: server_name:" + SentryServerName.FB_ADAPTER.value() + " type:" + SentryFacebookTags.DELETE_POST.value());
+        SentryIssueResponse[] fbDeletePost = client.getIssues("level:info server_name:" + SentryServerName.FB_ADAPTER.value() + " type:" + SentryFacebookTags.DELETE_POST.value(), token());
+        log.info("query: level:info server_name:" + SentryServerName.FB_ADAPTER.value() + " type:" + SentryFacebookTags.DELETE_POST.value());
         if (fbDeletePost.length == 1) {
             facebookEventsResponse.setDeletePostEventsCount(Long.parseLong(fbDeletePost[0].getCount()));
             allEventsCount += facebookEventsResponse.getDeletePostEventsCount();
