@@ -53,6 +53,30 @@ public class SentryServiceImpl implements SentryService {
     }
 
     @Override
+    public UsingSocialNetworkResponse getUsingSocialNetworkOnlyAllEventsCount() {
+        VkEventsResponse vkEventsResponse = new VkEventsResponse();
+        SentryIssueResponse[] vkAllIssues = client.getIssues("server_name:" + SentryServerName.VK_ADAPTER.value() + " level:info", token());
+        long vkEventCount = 0;
+        for (SentryIssueResponse response : vkAllIssues) {
+            vkEventCount += Long.parseLong(response.getCount());
+        }
+        vkEventsResponse.setAllEventsCount(vkEventCount);
+
+        FacebookEventsResponse facebookEventsResponse = new FacebookEventsResponse();
+        SentryIssueResponse[] facebookAllIssues = client.getIssues("server_name:" + SentryServerName.FB_ADAPTER.value() + " level:info", token());
+        long fbEventCount = 0;
+        for (SentryIssueResponse response : facebookAllIssues) {
+            fbEventCount += Long.parseLong(response.getCount());
+        }
+        facebookEventsResponse.setAllEventsCount(fbEventCount);
+
+        return UsingSocialNetworkResponse.builder()
+                .facebook(facebookEventsResponse)
+                .vk(vkEventsResponse)
+                .build();
+    }
+
+    @Override
     public List<UsersStatResponse> getOnlineUsersStatTimeline() {
         SentryIssueResponse[] issueResponse = client.getIssues("server_name:" + SentryServerName.AUTH.value() +
                 " type:" + SentryAuthTags.ONLINE_USERS.value(), token());
@@ -218,6 +242,15 @@ public class SentryServiceImpl implements SentryService {
                 .allErrorsCount(countAuthErrors + countBstatErrors + countFbAdapterErrors + countVkAdapterErrors +
                         countGatewayErrors + countMailSenderErrors + countStorageErrors + countTechSupportErrors +
                         countTextAnalyzerErrors + countWorkerErrors)
+                .build();
+    }
+
+    @Override
+    public ErrorsStatResponse getErrorsStatOnlyAllErrorsCount() {
+        SentryIssueResponse[] errorIssues = client.getIssues("level:error", token());
+        long countErrorsAll = countErrors(errorIssues);
+        return ErrorsStatResponse.builder()
+                .allErrorsCount(countErrorsAll)
                 .build();
     }
 

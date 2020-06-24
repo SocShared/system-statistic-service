@@ -1,22 +1,24 @@
 package ml.socshared.stat.domain.response.errorstat;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Builder;
 import lombok.Data;
 
 @Data
 @Builder
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ErrorsStatResponse {
 
-    private long allErrorsCount;
-    private long authErrorsCount;
-    private long bstatErrorsCount;
-    private long textAnalyzerErrorsCount;
-    private long vkAdapterErrorsCount;
-    private long fbAdapterErrorsCount;
-    private long techSupportErrorsCount;
-    private long workerErrorsCount;
-    private long mailSenderErrorsCount;
-    private long gatewayErrorsCount;
-    private long storageErrorsCount;
+    private Long allErrorsCount;
+    private Long authErrorsCount;
+    private Long bstatErrorsCount;
+    private Long textAnalyzerErrorsCount;
+    private Long vkAdapterErrorsCount;
+    private Long fbAdapterErrorsCount;
+    private Long techSupportErrorsCount;
+    private Long workerErrorsCount;
+    private Long mailSenderErrorsCount;
+    private Long gatewayErrorsCount;
+    private Long storageErrorsCount;
 
 }
