@@ -52,9 +52,27 @@ public class SentryServiceImpl implements SentryService {
         return errorsStatResponse;
     }
 
-
     @Override
     public List<UsersStatResponse> getOnlineUsersStatTimeline() {
+        return onlineStatResponse;
+    }
+
+    @Override
+    public List<UsersStatResponse> getActiveUsersStatTimeline() {
+        return activeStatResponse;
+    }
+
+    @Override
+    public List<UsersStatResponse> getNewUsersStatTimeline() {
+        return newStatResponse;
+    }
+
+    @Override
+    public List<UsersStatResponse> getAllUsersStatTimeline() {
+        return allStatResponse;
+    }
+
+    public List<UsersStatResponse> getOnlineUsersStatTimelineSentry() {
         SentryIssueResponse[] issueResponse = client.getIssues("level:info server_name:" + SentryServerName.AUTH.value() +
                 " type:" + SentryAuthTags.ONLINE_USERS.value(), token());
 
@@ -99,8 +117,7 @@ public class SentryServiceImpl implements SentryService {
         return lists;
     }
 
-    @Override
-    public List<UsersStatResponse> getActiveUsersStatTimeline() {
+    public List<UsersStatResponse> getActiveUsersStatTimelineSentry() {
         SentryIssueResponse[] issueResponse = client.getIssues("level:info server_name:" + SentryServerName.AUTH.value() +
                 " type:" + SentryAuthTags.ACTIVE_USERS.value(), token());
 
@@ -146,8 +163,7 @@ public class SentryServiceImpl implements SentryService {
         return lists;
     }
 
-    @Override
-    public List<UsersStatResponse> getNewUsersStatTimeline() {
+    public List<UsersStatResponse> getNewUsersStatTimelineSentry() {
         SentryIssueResponse[] issueResponse = client.getIssues("level:info server_name:" + SentryServerName.AUTH.value() +
                 " type:" + SentryAuthTags.NEW_USERS.value(), token());
 
@@ -193,8 +209,7 @@ public class SentryServiceImpl implements SentryService {
         return lists;
     }
 
-    @Override
-    public List<UsersStatResponse> getAllUsersStatTimeline() {
+    public List<UsersStatResponse> getAllUsersStatTimelineSentry() {
         SentryIssueResponse[] issueResponse = client.getIssues("level:info server_name:" + SentryServerName.AUTH.value() +
                 " type:" + SentryAuthTags.ALL_USERS.value(), token());
 
@@ -511,10 +526,26 @@ public class SentryServiceImpl implements SentryService {
 
     private UsingSocialNetworkResponse usingSocialNetworkResponse = UsingSocialNetworkResponse.builder().build();
     private ErrorsStatResponse errorsStatResponse = ErrorsStatResponse.builder().build();
+    private List<UsersStatResponse> onlineStatResponse = new ArrayList<>();
+    private List<UsersStatResponse> activeStatResponse = new ArrayList<>();
+    private List<UsersStatResponse> newStatResponse = new ArrayList<>();
+    private List<UsersStatResponse> allStatResponse = new ArrayList<>();
 
-    @Scheduled(fixedDelay = 60000)
-    public void setSentryStatistic() {
+    @Scheduled(fixedDelay = 30000)
+    public void setUsingSNR() {
         usingSocialNetworkResponse = getUsingSocialNetworkSentry();
+    }
+
+    @Scheduled(fixedDelay = 30000)
+    public void setEST() {
         errorsStatResponse = getErrorsStatSentry();
+    }
+
+    @Scheduled(fixedDelay = 3600000)
+    public void setUsersCountTimeline() {
+        onlineStatResponse = getOnlineUsersStatTimelineSentry();
+        activeStatResponse = getActiveUsersStatTimelineSentry();
+        newStatResponse = getNewUsersStatTimelineSentry();
+        allStatResponse = getAllUsersStatTimelineSentry();
     }
 }
