@@ -92,7 +92,7 @@ public class SentryServiceImpl implements SentryService {
         while (lists.size() < 30) {
             lists.add(UsersStatResponse.builder()
                     .onlineUsers(0L)
-                    .dateTime(usersStatResponse.getDateTime().minusDays(1))
+                    .dateTime(lists.get(lists.size() - 1).getDateTime().minusDays(1))
                     .build());
         }
 
@@ -139,7 +139,7 @@ public class SentryServiceImpl implements SentryService {
         while (lists.size() < 30) {
             lists.add(UsersStatResponse.builder()
                     .activeUsers(0L)
-                    .dateTime(usersStatResponse.getDateTime().minusDays(1))
+                    .dateTime(lists.get(lists.size() - 1).getDateTime().minusDays(1))
                     .build());
         }
 
@@ -186,7 +186,7 @@ public class SentryServiceImpl implements SentryService {
         while (lists.size() < 30) {
             lists.add(UsersStatResponse.builder()
                     .newUsers(0L)
-                    .dateTime(usersStatResponse.getDateTime().minusDays(1))
+                    .dateTime(lists.get(lists.size() - 1).getDateTime().minusDays(1))
                     .build());
         }
 
@@ -233,7 +233,7 @@ public class SentryServiceImpl implements SentryService {
         while (lists.size() < 30) {
             lists.add(UsersStatResponse.builder()
                     .allUsers(0L)
-                    .dateTime(usersStatResponse.getDateTime().minusDays(1))
+                    .dateTime(lists.get(lists.size() - 1).getDateTime().minusDays(1))
                     .build());
         }
 
