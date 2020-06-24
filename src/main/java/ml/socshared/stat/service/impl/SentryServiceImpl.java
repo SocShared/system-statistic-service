@@ -17,6 +17,7 @@ import ml.socshared.stat.domain.response.usingsocial.VkEventsResponse;
 import ml.socshared.stat.exception.impl.HttpBadGatewayException;
 import ml.socshared.stat.service.SentryService;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -42,14 +43,12 @@ public class SentryServiceImpl implements SentryService {
 
     @Override
     public UsingSocialNetworkResponse getUsingSocialNetwork() {
-        VkEventsResponse vkEventsResponse = findVkEvents();
+        return usingSocialNetworkResponse;
+    }
 
-        FacebookEventsResponse facebookEventsResponse = findFacebookEvents();
-
-        return UsingSocialNetworkResponse.builder()
-                .facebook(facebookEventsResponse)
-                .vk(vkEventsResponse)
-                .build();
+    @Override
+    public ErrorsStatResponse getErrorsStat() {
+        return errorsStatResponse;
     }
 
     @Override
@@ -197,55 +196,6 @@ public class SentryServiceImpl implements SentryService {
     }
 
     @Override
-    public ErrorsStatResponse getErrorsStat() {
-        SentryIssueResponse[] authErrors = client.getIssues("server_name:" + SentryServerName.AUTH.value() + " level:error", token());
-        long countAuthErrors = countErrors(authErrors);
-
-        SentryIssueResponse[] vkAdapterErrors = client.getIssues("server_name:" + SentryServerName.VK_ADAPTER.value() + " level:error", token());
-        long countVkAdapterErrors = countErrors(vkAdapterErrors);
-
-        SentryIssueResponse[] fbAdapterErrors = client.getIssues("server_name:" + SentryServerName.FB_ADAPTER.value() + " level:error", token());
-        long countFbAdapterErrors = countErrors(fbAdapterErrors);
-
-        SentryIssueResponse[] workerErrors = client.getIssues("server_name:" + SentryServerName.WORKER.value() + " level:error", token());
-        long countWorkerErrors = countErrors(workerErrors);
-
-        SentryIssueResponse[] storageErrors = client.getIssues("server_name:" + SentryServerName.STORAGE.value() + " level:error", token());
-        long countStorageErrors = countErrors(storageErrors);
-
-        SentryIssueResponse[] bstatErrors = client.getIssues("server_name:" + SentryServerName.BSTAT.value() + " level:error", token());
-        long countBstatErrors = countErrors(bstatErrors);
-
-        SentryIssueResponse[] mailSenderErrors = client.getIssues("server_name:" + SentryServerName.MAIL_SENDER.value() + " level:error", token());
-        long countMailSenderErrors = countErrors(mailSenderErrors);
-
-        SentryIssueResponse[] gatewayErrors = client.getIssues("server_name:" + SentryServerName.GATEWAY.value() + " level:error", token());
-        long countGatewayErrors = countErrors(gatewayErrors);
-
-        SentryIssueResponse[] techSupportErrors = client.getIssues("server_name:" + SentryServerName.TECH_SUPPORT.value() + " level:error", token());
-        long countTechSupportErrors = countErrors(techSupportErrors);
-
-        SentryIssueResponse[] textAnalyzerErrors = client.getIssues("server_name:" + SentryServerName.TEXT_ANALYZER.value() + " level:error", token());
-        long countTextAnalyzerErrors = countErrors(textAnalyzerErrors);
-
-        return ErrorsStatResponse.builder()
-                .authErrorsCount(countAuthErrors)
-                .bstatErrorsCount(countBstatErrors)
-                .fbAdapterErrorsCount(countFbAdapterErrors)
-                .vkAdapterErrorsCount(countVkAdapterErrors)
-                .gatewayErrorsCount(countGatewayErrors)
-                .mailSenderErrorsCount(countMailSenderErrors)
-                .storageErrorsCount(countStorageErrors)
-                .techSupportErrorsCount(countTechSupportErrors)
-                .textAnalyzerErrorsCount(countTextAnalyzerErrors)
-                .workerErrorsCount(countWorkerErrors)
-                .allErrorsCount(countAuthErrors + countBstatErrors + countFbAdapterErrors + countVkAdapterErrors +
-                        countGatewayErrors + countMailSenderErrors + countStorageErrors + countTechSupportErrors +
-                        countTextAnalyzerErrors + countWorkerErrors)
-                .build();
-    }
-
-    @Override
     public ErrorsStatResponse getErrorsStatOnlyAllErrorsCount() {
         SentryIssueResponse[] errorIssues = client.getIssues("level:error", token());
         long countErrorsAll = countErrors(errorIssues);
@@ -260,6 +210,17 @@ public class SentryServiceImpl implements SentryService {
             count += Long.parseLong(response.getCount());
         }
         return count;
+    }
+
+    public UsingSocialNetworkResponse getUsingSocialNetworkSentry() {
+        VkEventsResponse vkEventsResponse = findVkEvents();
+
+        FacebookEventsResponse facebookEventsResponse = findFacebookEvents();
+
+        return UsingSocialNetworkResponse.builder()
+                .facebook(facebookEventsResponse)
+                .vk(vkEventsResponse)
+                .build();
     }
 
     private VkEventsResponse findVkEvents() {
@@ -462,5 +423,62 @@ public class SentryServiceImpl implements SentryService {
         facebookEventsResponse.setAllEventsCount(allEventsCount);
 
         return facebookEventsResponse;
+    }
+
+    public ErrorsStatResponse getErrorsStatSentry() {
+        SentryIssueResponse[] authErrors = client.getIssues("server_name:" + SentryServerName.AUTH.value() + " level:error", token());
+        long countAuthErrors = countErrors(authErrors);
+
+        SentryIssueResponse[] vkAdapterErrors = client.getIssues("server_name:" + SentryServerName.VK_ADAPTER.value() + " level:error", token());
+        long countVkAdapterErrors = countErrors(vkAdapterErrors);
+
+        SentryIssueResponse[] fbAdapterErrors = client.getIssues("server_name:" + SentryServerName.FB_ADAPTER.value() + " level:error", token());
+        long countFbAdapterErrors = countErrors(fbAdapterErrors);
+
+        SentryIssueResponse[] workerErrors = client.getIssues("server_name:" + SentryServerName.WORKER.value() + " level:error", token());
+        long countWorkerErrors = countErrors(workerErrors);
+
+        SentryIssueResponse[] storageErrors = client.getIssues("server_name:" + SentryServerName.STORAGE.value() + " level:error", token());
+        long countStorageErrors = countErrors(storageErrors);
+
+        SentryIssueResponse[] bstatErrors = client.getIssues("server_name:" + SentryServerName.BSTAT.value() + " level:error", token());
+        long countBstatErrors = countErrors(bstatErrors);
+
+        SentryIssueResponse[] mailSenderErrors = client.getIssues("server_name:" + SentryServerName.MAIL_SENDER.value() + " level:error", token());
+        long countMailSenderErrors = countErrors(mailSenderErrors);
+
+        SentryIssueResponse[] gatewayErrors = client.getIssues("server_name:" + SentryServerName.GATEWAY.value() + " level:error", token());
+        long countGatewayErrors = countErrors(gatewayErrors);
+
+        SentryIssueResponse[] techSupportErrors = client.getIssues("server_name:" + SentryServerName.TECH_SUPPORT.value() + " level:error", token());
+        long countTechSupportErrors = countErrors(techSupportErrors);
+
+        SentryIssueResponse[] textAnalyzerErrors = client.getIssues("server_name:" + SentryServerName.TEXT_ANALYZER.value() + " level:error", token());
+        long countTextAnalyzerErrors = countErrors(textAnalyzerErrors);
+
+        return ErrorsStatResponse.builder()
+                .authErrorsCount(countAuthErrors)
+                .bstatErrorsCount(countBstatErrors)
+                .fbAdapterErrorsCount(countFbAdapterErrors)
+                .vkAdapterErrorsCount(countVkAdapterErrors)
+                .gatewayErrorsCount(countGatewayErrors)
+                .mailSenderErrorsCount(countMailSenderErrors)
+                .storageErrorsCount(countStorageErrors)
+                .techSupportErrorsCount(countTechSupportErrors)
+                .textAnalyzerErrorsCount(countTextAnalyzerErrors)
+                .workerErrorsCount(countWorkerErrors)
+                .allErrorsCount(countAuthErrors + countBstatErrors + countFbAdapterErrors + countVkAdapterErrors +
+                        countGatewayErrors + countMailSenderErrors + countStorageErrors + countTechSupportErrors +
+                        countTextAnalyzerErrors + countWorkerErrors)
+                .build();
+    }
+
+    private UsingSocialNetworkResponse usingSocialNetworkResponse = UsingSocialNetworkResponse.builder().build();
+    private ErrorsStatResponse errorsStatResponse = ErrorsStatResponse.builder().build();
+
+    @Scheduled(fixedDelay = 60000)
+    public void setSentryStatistic() {
+        usingSocialNetworkResponse = getUsingSocialNetworkSentry();
+        errorsStatResponse = getErrorsStatSentry();
     }
 }
