@@ -54,12 +54,12 @@ public class SentryServiceImpl implements SentryService {
 
     @Override
     public List<UsersStatResponse> getOnlineUsersStatTimeline() {
-        SentryIssueResponse[] issueResponse = client.getIssues("server_name:" + SentryServerName.AUTH.value() +
+        SentryIssueResponse[] issueResponse = client.getIssues("level:info server_name:" + SentryServerName.AUTH.value() +
                 " type:" + SentryAuthTags.ONLINE_USERS.value(), token());
 
         if (issueResponse.length == 1) {
             SentryEventResponse[] events = client.getEvents(issueResponse[0].getId(),
-                    "server_name:" + SentryServerName.AUTH.value() + " type:" + SentryAuthTags.ONLINE_USERS.value(),
+                    "level:info server_name:" + SentryServerName.AUTH.value() + " type:" + SentryAuthTags.ONLINE_USERS.value(),
                     token());
 
             List<UsersStatResponse> lists = new LinkedList<>();
@@ -84,12 +84,12 @@ public class SentryServiceImpl implements SentryService {
 
     @Override
     public List<UsersStatResponse> getActiveUsersStatTimeline() {
-        SentryIssueResponse[] issueResponse = client.getIssues("server_name:" + SentryServerName.AUTH.value() +
+        SentryIssueResponse[] issueResponse = client.getIssues("level:info server_name:" + SentryServerName.AUTH.value() +
                 " type:" + SentryAuthTags.ACTIVE_USERS.value(), token());
 
         if (issueResponse.length == 1) {
             SentryEventResponse[] events = client.getEvents(issueResponse[0].getId(),
-                    "server_name:" + SentryServerName.AUTH.value() + " type:" + SentryAuthTags.ACTIVE_USERS.value(),
+                    "level:info server_name:" + SentryServerName.AUTH.value() + " type:" + SentryAuthTags.ACTIVE_USERS.value(),
                     token());
 
             List<UsersStatResponse> lists = new LinkedList<>();
@@ -114,12 +114,12 @@ public class SentryServiceImpl implements SentryService {
 
     @Override
     public List<UsersStatResponse> getNewUsersStatTimeline() {
-        SentryIssueResponse[] issueResponse = client.getIssues("server_name:" + SentryServerName.AUTH.value() +
+        SentryIssueResponse[] issueResponse = client.getIssues("level:info server_name:" + SentryServerName.AUTH.value() +
                 " type:" + SentryAuthTags.NEW_USERS.value(), token());
 
         if (issueResponse.length == 1) {
             SentryEventResponse[] events = client.getEvents(issueResponse[0].getId(),
-                    "server_name:" + SentryServerName.AUTH.value() + " type:" + SentryAuthTags.NEW_USERS.value(),
+                    "level:info server_name:" + SentryServerName.AUTH.value() + " type:" + SentryAuthTags.NEW_USERS.value(),
                     token());
 
             List<UsersStatResponse> lists = new LinkedList<>();
@@ -144,12 +144,12 @@ public class SentryServiceImpl implements SentryService {
 
     @Override
     public List<UsersStatResponse> getAllUsersStatTimeline() {
-        SentryIssueResponse[] issueResponse = client.getIssues("server_name:" + SentryServerName.AUTH.value() +
+        SentryIssueResponse[] issueResponse = client.getIssues("level:info server_name:" + SentryServerName.AUTH.value() +
                 " type:" + SentryAuthTags.ALL_USERS.value(), token());
 
         if (issueResponse.length == 1) {
             SentryEventResponse[] events = client.getEvents(issueResponse[0].getId(),
-                    "server_name:" + SentryServerName.AUTH.value() + " type:" + SentryAuthTags.ALL_USERS.value(),
+                    "level:info server_name:" + SentryServerName.AUTH.value() + " type:" + SentryAuthTags.ALL_USERS.value(),
                     token());
 
             List<UsersStatResponse> lists = new LinkedList<>();
