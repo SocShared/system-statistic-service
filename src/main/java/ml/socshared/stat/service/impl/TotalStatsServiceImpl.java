@@ -22,7 +22,7 @@ public class TotalStatsServiceImpl implements TotalStatsService {
 
     @Override
     public TotalStatsResponse totalStats() {
-        UsingSocialNetworkResponse usingSocialNetworkResponse = sentryService.getUsingSocialNetworkOnlyAllEventsCount();
+        UsingSocialNetworkResponse usingSocialNetworkResponse = sentryService.getUsingSocialNetwork();
 
         long allEventUsingSocial = usingSocialNetworkResponse.getFacebook().getAllEventsCount() +
                 usingSocialNetworkResponse.getVk().getAllEventsCount();
@@ -30,7 +30,7 @@ public class TotalStatsServiceImpl implements TotalStatsService {
         long usingFacebookPercent = Math.round(1.0 * usingSocialNetworkResponse.getFacebook().getAllEventsCount() / allEventUsingSocial * 100);
         long usingVkPercent = Math.round(1.0 * usingSocialNetworkResponse.getVk().getAllEventsCount() / allEventUsingSocial * 100);
 
-        ErrorsStatResponse errorsStatResponse = sentryService.getErrorsStatOnlyAllErrorsCount();
+        ErrorsStatResponse errorsStatResponse = sentryService.getErrorsStat();
 
         SocCountResponse socCountResponse = socService.count();
 
