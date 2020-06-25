@@ -97,16 +97,15 @@ public class SentryServiceImpl implements SentryService {
             }
 
         }
-        UsersStatResponse usersStatResponse;
-        if (lists.size() != 0) {
-            usersStatResponse = lists.get(lists.size() - 1);
-        } else {
-            usersStatResponse = UsersStatResponse.builder()
+
+        if (lists.size() == 0) {
+            UsersStatResponse usersStatResponse = UsersStatResponse.builder()
                     .onlineUsers(0L)
                     .dateTime(LocalDateTime.now())
                     .build();
+            lists.add(usersStatResponse);
         }
-        lists.add(usersStatResponse);
+
         while (lists.size() < 30) {
             lists.add(UsersStatResponse.builder()
                     .onlineUsers(0L)
@@ -143,16 +142,14 @@ public class SentryServiceImpl implements SentryService {
 
         }
 
-        UsersStatResponse usersStatResponse;
-        if (lists.size() != 0) {
-            usersStatResponse = lists.get(lists.size() - 1);
-        } else {
-            usersStatResponse = UsersStatResponse.builder()
-                    .activeUsers(0L)
+        if (lists.size() == 0) {
+            UsersStatResponse usersStatResponse = UsersStatResponse.builder()
+                    .onlineUsers(0L)
                     .dateTime(LocalDateTime.now())
                     .build();
+            lists.add(usersStatResponse);
         }
-        lists.add(usersStatResponse);
+
         while (lists.size() < 30) {
             lists.add(UsersStatResponse.builder()
                     .activeUsers(0L)
@@ -189,16 +186,14 @@ public class SentryServiceImpl implements SentryService {
 
         }
 
-        UsersStatResponse usersStatResponse;
-        if (lists.size() != 0) {
-            usersStatResponse = lists.get(lists.size() - 1);
-        } else {
-            usersStatResponse = UsersStatResponse.builder()
-                    .newUsers(0L)
+        if (lists.size() == 0) {
+            UsersStatResponse usersStatResponse = UsersStatResponse.builder()
+                    .onlineUsers(0L)
                     .dateTime(LocalDateTime.now())
                     .build();
+            lists.add(usersStatResponse);
         }
-        lists.add(usersStatResponse);
+
         while (lists.size() < 30) {
             lists.add(UsersStatResponse.builder()
                     .newUsers(0L)
@@ -235,16 +230,14 @@ public class SentryServiceImpl implements SentryService {
 
         }
 
-        UsersStatResponse usersStatResponse;
-        if (lists.size() != 0) {
-            usersStatResponse = lists.get(lists.size() - 1);
-        } else {
-            usersStatResponse = UsersStatResponse.builder()
-                    .allUsers(0L)
+        if (lists.size() == 0) {
+            UsersStatResponse usersStatResponse = UsersStatResponse.builder()
+                    .onlineUsers(0L)
                     .dateTime(LocalDateTime.now())
                     .build();
+            lists.add(usersStatResponse);
         }
-        lists.add(usersStatResponse);
+
         while (lists.size() < 30) {
             lists.add(UsersStatResponse.builder()
                     .allUsers(0L)
